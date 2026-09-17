@@ -35,6 +35,8 @@ npm run dev       # http://localhost:4000
 
 ## 라이선스
 
+Calcsta는 Stabileo를 수정하여 2026년 9월부터 개발한 비공식 파생 프로젝트입니다.
+
 Calcsta는 Stabileo 의 라이선스에 따라 [AGPL-3.0](LICENSE) 으로 배포됩니다.
 
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
