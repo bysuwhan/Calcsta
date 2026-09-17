@@ -1,0 +1,14 @@
+D:\Documents\coding\Calcsta\target\wasm32-unknown-unknown\release\build\serde/b0244401aa0b74df\out\serde-b0244401aa0b74df.d: C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs D:\Documents\coding\Calcsta\target\wasm32-unknown-unknown\release\build\serde/913c51dd381c3a7a\out/private.rs
+
+D:\Documents\coding\Calcsta\target\wasm32-unknown-unknown\release\build\serde/b0244401aa0b74df\out\libserde-b0244401aa0b74df.rlib: C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs D:\Documents\coding\Calcsta\target\wasm32-unknown-unknown\release\build\serde/913c51dd381c3a7a\out/private.rs
+
+D:\Documents\coding\Calcsta\target\wasm32-unknown-unknown\release\build\serde/b0244401aa0b74df\out\libserde-b0244401aa0b74df.rmeta: C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs D:\Documents\coding\Calcsta\target\wasm32-unknown-unknown\release\build\serde/913c51dd381c3a7a\out/private.rs
+
+C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\lib.rs:
+C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\integer128.rs:
+C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\mod.rs:
+C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\de.rs:
+C:\Users\Sessac\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.228\src\private\ser.rs:
+D:\Documents\coding\Calcsta\target\wasm32-unknown-unknown\release\build\serde/913c51dd381c3a7a\out/private.rs:
+
+# env-dep:OUT_DIR=D:\\Documents\\coding\\Calcsta\\target\\wasm32-unknown-unknown\\release\\build\\serde/913c51dd381c3a7a\\out

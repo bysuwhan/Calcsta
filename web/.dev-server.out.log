@@ -1,0 +1,218 @@
+
+> stabileo-web@0.1.0 dev
+> vite
+
+
+  VITE v6.4.1  ready in 683 ms
+
+  ➜  Local:   http://localhost:4000/
+  ➜  Network: use --host to expose
+오전 8:57:01 [vite-plugin-svelte] src/App.svelte:160:102 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 8:57:01 [vite-plugin-svelte] src/App.svelte:160:102 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:01 [vite-plugin-svelte] src/components/BlockPanel.svelte:44:2 `<div>` with a click or contextmenu handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:01 [vite-plugin-svelte] src/components/BlockPanel.svelte:59:2 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:01 [vite-plugin-svelte] src/components/BlockPanel.svelte:60:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:01 [vite-plugin-svelte] src/components/BlockPanel.svelte:66:78 Avoid using autofocus
+https://svelte.dev/e/a11y_autofocus
+오전 8:57:01 [vite-plugin-svelte] src/components/ElementEditor.svelte:104:2 `<div>` with a keydown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:01 [vite-plugin-svelte] src/components/DxfImportDialog.svelte:164:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 8:57:01 [vite-plugin-svelte] src/components/DxfImportDialog.svelte:164:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:01 [vite-plugin-svelte] src/components/DxfImportDialog.svelte:182:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:01 [vite-plugin-svelte] src/components/DxfImportDialog.svelte:190:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:01 [vite-plugin-svelte] src/components/ribbon/Ribbon.svelte:607:2 Unused CSS selector ".rb-cmd.prominent"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:01 [vite-plugin-svelte] src/components/ribbon/Ribbon.svelte:613:2 Unused CSS selector ".rb-cmd.prominent :global(svg)"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:01 [vite-plugin-svelte] src/components/TabBar.svelte:54:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 8:57:01 [vite-plugin-svelte] src/components/HelpOverlay.svelte:16:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 8:57:01 [vite-plugin-svelte] src/components/HelpOverlay.svelte:16:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:01 [vite-plugin-svelte] src/components/ContextMenu.svelte:65:2 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 8:57:01 [vite-plugin-svelte] src/components/ContextMenu.svelte:65:2 `<div>` with a click or contextmenu handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:01 [vite-plugin-svelte] src/components/ProfileSelector.svelte:44:2 Elements with the 'dialog' interactive role must have a tabindex value
+https://svelte.dev/e/a11y_interactive_supports_focus
+오전 8:57:01 [vite-plugin-svelte] src/components/ProfileSelector.svelte:45:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 8:57:01 [vite-plugin-svelte] src/components/ProfileSelector.svelte:45:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:01 [vite-plugin-svelte] src/components/dsm/Step2LocalMatrices.svelte:87:2 Unused CSS selector ".formula-note"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:01 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:87:53 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:01 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:146:48 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:01 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:154:53 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:01 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:161:48 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:01 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:373:2 Unused CSS selector "input[type="radio"]"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:01 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:378:2 Unused CSS selector ".help-hint"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:01 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:392:2 Unused CSS selector ".help-hint:hover"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:158:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:166:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:180:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:193:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:227:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:283:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:427:18 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:523:2 Unused CSS selector ".results-table-block"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarAdvanced.svelte:892:2 Unused CSS selector ".flat .il-sub-panel"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/WhatIfPanel.svelte:200:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/WhatIfPanel.svelte:217:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/WhatIfPanel.svelte:234:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/WhatIfPanel.svelte:247:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarProject.svelte:378:2 Unused CSS selector ".small-btn"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarProject.svelte:388:2 Unused CSS selector ".small-btn:hover:not(:disabled)"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/toolbar/ToolbarProject.svelte:393:2 Unused CSS selector ".small-btn:disabled"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/DataTable.svelte:61:0 Non-interactive element `<div>` should not be assigned mouse or keyboard event listeners
+https://svelte.dev/e/a11y_no_noninteractive_element_interactions
+오전 8:57:02 [vite-plugin-svelte] src/components/floating-tools/ToolSupportOptions.svelte:165:2 Unused CSS selector ".ft-chk"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/floating-tools/ToolSupportOptions.svelte:174:2 Unused CSS selector ".ft-chk input"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/floating-tools/ToolSupportOptions.svelte:180:2 Unused CSS selector ".ft-chk span"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/floating-tools/ToolSupportOptions.svelte:228:2 Unused CSS selector ".ft-hint"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/floating-tools/ToolNodeOptions.svelte:94:2 Unused CSS selector ".ft-input-group"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/floating-tools/ToolNodeOptions.svelte:102:2 Unused CSS selector ".ft-input-group input"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/floating-tools/ToolNodeOptions.svelte:112:2 Unused CSS selector ".ft-unit"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/floating-tools/SelectedEntityPanel.svelte:409:2 Unused CSS selector ".ft-chk"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/floating-tools/SelectedEntityPanel.svelte:418:2 Unused CSS selector ".ft-chk input"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/floating-tools/SelectedEntityPanel.svelte:424:2 Unused CSS selector ".ft-chk span"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/dsm/VectorDisplay.svelte:34:8 `<tr>` cannot be a child of `<table>`. `<table>` only allows these children: `<caption>`, `<colgroup>`, `<tbody>`, `<thead>`, `<tfoot>`, `<style>`, `<script>`, `<template>`. When rendering this component on the server, the resulting HTML will be modified by the browser (by moving, removing, or inserting elements), likely resulting in a `hydration_mismatch` warning
+https://svelte.dev/e/node_invalid_placement_ssr
+오전 8:57:02 [vite-plugin-svelte] src/components/dsm/VectorDisplay.svelte:40:6 `<tr>` cannot be a child of `<table>`. `<table>` only allows these children: `<caption>`, `<colgroup>`, `<tbody>`, `<thead>`, `<tfoot>`, `<style>`, `<script>`, `<template>`. When rendering this component on the server, the resulting HTML will be modified by the browser (by moving, removing, or inserting elements), likely resulting in a `hydration_mismatch` warning
+https://svelte.dev/e/node_invalid_placement_ssr
+오전 8:57:02 [vite-plugin-svelte] src/components/dsm/VectorDisplay.svelte:49:8 `<tr>` cannot be a child of `<table>`. `<table>` only allows these children: `<caption>`, `<colgroup>`, `<tbody>`, `<thead>`, `<tfoot>`, `<style>`, `<script>`, `<template>`. When rendering this component on the server, the resulting HTML will be modified by the browser (by moving, removing, or inserting elements), likely resulting in a `hydration_mismatch` warning
+https://svelte.dev/e/node_invalid_placement_ssr
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/ResultsTable.svelte:271:2 Unused CSS selector ".combo-view-tabs"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/ResultsTable.svelte:274:2 Unused CSS selector ".combo-view-tabs button.active"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/CalcReportDialog.svelte:116:0 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 8:57:02 [vite-plugin-svelte] src/components/CalcReportDialog.svelte:118:2 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 8:57:02 [vite-plugin-svelte] src/components/HelpTip.svelte:83:0 `<span>` with a mouseenter or mouseleave handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/SupportsTable.svelte:171:2 Unused CSS selector ".dof-chk"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/SupportsTable.svelte:180:2 Unused CSS selector ".dof-chk input"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/ElementsTable.svelte:181:2 Unused CSS selector "td input[type="number"]"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/SectionsTable.svelte:367:2 Unused CSS selector ".rot-input"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/SectionsTable.svelte:393:2 Unused CSS selector ".name-with-action"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/SectionsTable.svelte:399:2 Unused CSS selector ".name-with-action input"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/SectionsTable.svelte:459:2 Unused CSS selector ".ro-val"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/MaterialsTable.svelte:198:2 Unused CSS selector ".name-with-action"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/components/tables/MaterialsTable.svelte:204:2 Unused CSS selector ".name-with-action input"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:02 [vite-plugin-svelte] src/lib/store/model.svelte.ts:243:2 This reference only captures the initial value of `nextId`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+오전 8:57:02 [vite-plugin-svelte] src/lib/store/model.svelte.ts:244:2 This reference only captures the initial value of `nextId`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+오전 8:57:03 [vite-plugin-svelte] src/components/MaterialPresetSelector.svelte:95:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 8:57:03 [vite-plugin-svelte] src/components/SectionChanger.svelte:205:2 Elements with the 'dialog' interactive role must have a tabindex value
+https://svelte.dev/e/a11y_interactive_supports_focus
+오전 8:57:03 [vite-plugin-svelte] src/components/SectionChanger.svelte:206:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 8:57:03 [vite-plugin-svelte] src/components/SectionChanger.svelte:206:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 8:57:03 [vite-plugin-svelte] src/components/SectionChanger.svelte:595:2 Unused CSS selector ".series-group"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:03 [vite-plugin-svelte] src/components/SectionChanger.svelte:716:2 Unused CSS selector ".profile-tabs"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:03 [vite-plugin-svelte] src/components/SectionChanger.svelte:775:2 Unused CSS selector ".series-label"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:03 [vite-plugin-svelte] src/components/SectionChanger.svelte:779:2 Unused CSS selector ".series-label:first-child"
+https://svelte.dev/e/css_unused_selector
+오전 8:57:03 [vite-plugin-svelte] src/components/SectionChanger.svelte:783:2 Unused CSS selector ".profile-head"
+https://svelte.dev/e/css_unused_selector
+오전 9:30:43 [vite] (client) hmr update /src/components/ribbon/BasicPanel.svelte, /src/components/ribbon/ToolOptionsBar.svelte, /src/components/ribbon/Ribbon.svelte, /src/components/DataTable.svelte, /src/App.svelte, /src/components/toolbar/ToolbarResults.svelte, /src/components/BlockPanel.svelte, /src/components/StatusBar.svelte, /src/components/NodeEditor.svelte, /src/components/Viewport.svelte, /src/components/ElementEditor.svelte, /src/components/DespieceInspector.svelte, /src/components/SectionEditor.svelte, /src/components/MaterialEditor.svelte, /src/components/dsm/StepWizard.svelte, /src/components/DxfImportDialog.svelte, /src/components/stress/StressPickHint.svelte, /src/components/ColourScaleLegend.svelte, /src/components/TabBar.svelte, /src/components/KeyboardShortcuts.svelte, /src/components/HelpOverlay.svelte, /src/components/ContextMenu.svelte, /src/components/dsm/Step4Assembly.svelte, /src/components/dsm/Step2LocalMatrices.svelte, /src/components/dsm/Step3Transformation.svelte, /src/components/dsm/Step9InternalForces.svelte, /src/components/dsm/MatrixExplorer.svelte, /src/components/toolbar/ToolbarConfig.svelte, /src/components/SelectionPanel.svelte, /src/components/toolbar/ToolbarAdvanced.svelte, /src/components/KinematicPanel.svelte, /src/components/WhatIfPanel.svelte, /src/components/toolbar/ToolbarProject.svelte, /src/components/SectionStressPanel.svelte, /src/components/floating-tools/ToolSupportOptions.svelte, /src/components/floating-tools/ToolNodeOptions.svelte, /src/components/floating-tools/ToolElementOptions.svelte, /src/components/floating-tools/ToolLoadOptions.svelte, /src/components/floating-tools/SelectedEntityPanel.svelte, /src/components/tables/ResultsTable.svelte, /src/components/CalcReportDialog.svelte, /src/components/toolbar/ToolbarExamples.svelte, /src/components/tables/SupportsTable.svelte, /src/components/tables/ElementsTable.svelte, /src/components/tables/LoadsTable.svelte, /src/components/tables/NodesTable.svelte, /src/components/tables/SectionsTable.svelte, /src/components/tables/MaterialsTable.svelte, /src/components/stress/CrossSectionDrawing.svelte, /src/components/stress/StressTensorDetails.svelte, /src/components/stress/TorsionDetails.svelte, /src/components/stress/MohrCircleDisplay.svelte, /src/components/stress/StressStateDetails.svelte, /src/components/DemoMenu.svelte, /src/components/tables/CombosTable.svelte, /src/components/MaterialPresetSelector.svelte, /src/components/SectionChanger.svelte
+오전 9:30:44 [vite] (client) hmr update /src/App.svelte
+오전 9:30:44 [vite-plugin-svelte] src/App.svelte:162:102 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+오전 9:30:44 [vite-plugin-svelte] src/App.svelte:162:102 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 9:30:45 [vite] (client) hmr update /src/components/ribbon/BasicPanel.svelte
+오전 9:30:46 [vite] (client) hmr update /src/components/ribbon/Ribbon.svelte
+오전 9:30:46 [vite-plugin-svelte] src/components/ribbon/Ribbon.svelte:607:2 Unused CSS selector ".rb-cmd.prominent"
+https://svelte.dev/e/css_unused_selector
+오전 9:30:46 [vite-plugin-svelte] src/components/ribbon/Ribbon.svelte:613:2 Unused CSS selector ".rb-cmd.prominent :global(svg)"
+https://svelte.dev/e/css_unused_selector
+오전 9:30:47 [vite] (client) hmr update /src/components/Viewport.svelte
+오전 9:30:47 [vite] (client) hmr update /src/App.svelte, /src/components/StatusBar.svelte, /src/components/NodeEditor.svelte, /src/components/Viewport.svelte, /src/components/ElementEditor.svelte, /src/components/DespieceInspector.svelte, /src/components/SectionEditor.svelte, /src/components/MaterialEditor.svelte, /src/components/dsm/StepWizard.svelte, /src/components/DxfImportDialog.svelte, /src/components/ribbon/BasicPanel.svelte, /src/components/ribbon/ToolOptionsBar.svelte, /src/components/stress/StressPickHint.svelte, /src/components/ColourScaleLegend.svelte, /src/components/ribbon/Ribbon.svelte, /src/components/TabBar.svelte, /src/components/KeyboardShortcuts.svelte, /src/components/TourOverlay.svelte, /src/components/HelpOverlay.svelte, /src/components/ContextMenu.svelte, /src/components/ProfileSelector.svelte, /src/components/dsm/Step4Assembly.svelte, /src/components/dsm/Step2LocalMatrices.svelte, /src/components/dsm/Step3Transformation.svelte, /src/components/dsm/Step5LoadVector.svelte, /src/components/dsm/Step1DOFNumbering.svelte, /src/components/dsm/Step6Partitioning.svelte, /src/components/dsm/Step7Solution.svelte, /src/components/dsm/Step8Reactions.svelte, /src/components/dsm/Step9InternalForces.svelte, /src/components/dsm/MatrixExplorer.svelte, /src/components/toolbar/ToolbarConfig.svelte, /src/components/SelectionPanel.svelte, /src/components/toolbar/ToolbarResults.svelte, /src/components/toolbar/ToolbarAdvanced.svelte, /src/components/KinematicPanel.svelte, /src/components/WhatIfPanel.svelte, /src/components/toolbar/ToolbarProject.svelte, /src/components/DataTable.svelte, /src/components/SectionStressPanel.svelte, /src/components/floating-tools/ToolSupportOptions.svelte, /src/components/floating-tools/ToolNodeOptions.svelte, /src/components/BlockPanel.svelte, /src/components/floating-tools/ToolElementOptions.svelte, /src/components/floating-tools/ToolLoadOptions.svelte, /src/components/floating-tools/SelectedEntityPanel.svelte, /src/components/tables/ResultsTable.svelte, /src/components/CalcReportDialog.svelte, /src/components/toolbar/ToolbarExamples.svelte, /src/components/tables/SupportsTable.svelte, /src/components/tables/ElementsTable.svelte, /src/components/tables/LoadsTable.svelte, /src/components/tables/NodesTable.svelte, /src/components/tables/SectionsTable.svelte, /src/components/tables/MaterialsTable.svelte, /src/components/stress/CrossSectionDrawing.svelte, /src/components/stress/StressTensorDetails.svelte, /src/components/stress/TorsionDetails.svelte, /src/components/stress/MohrCircleDisplay.svelte, /src/components/stress/StressStateDetails.svelte, /src/components/DemoMenu.svelte, /src/components/tables/CombosTable.svelte, /src/components/MaterialPresetSelector.svelte, /src/components/SectionChanger.svelte, /src/components/SelectionFilterBar.svelte, /src/components/dsm/MatrixDisplay.svelte, /src/components/stress/CentralCoreDetails.svelte, /src/components/stress/GeometricPropertyWorking.svelte, /src/components/property/PairingNote.svelte
+오전 9:30:48 [vite] (client) hmr update /src/App.svelte, /src/components/StatusBar.svelte, /src/components/NodeEditor.svelte, /src/components/Viewport.svelte, /src/components/ElementEditor.svelte, /src/components/DespieceInspector.svelte, /src/components/SectionEditor.svelte, /src/components/MaterialEditor.svelte, /src/components/dsm/StepWizard.svelte, /src/components/DxfImportDialog.svelte, /src/components/ribbon/BasicPanel.svelte, /src/components/ribbon/ToolOptionsBar.svelte, /src/components/stress/StressPickHint.svelte, /src/components/ColourScaleLegend.svelte, /src/components/ribbon/Ribbon.svelte, /src/components/TabBar.svelte, /src/components/KeyboardShortcuts.svelte, /src/components/TourOverlay.svelte, /src/components/HelpOverlay.svelte, /src/components/ContextMenu.svelte, /src/components/ProfileSelector.svelte, /src/components/dsm/Step4Assembly.svelte, /src/components/dsm/Step2LocalMatrices.svelte, /src/components/dsm/Step3Transformation.svelte, /src/components/dsm/Step5LoadVector.svelte, /src/components/dsm/Step1DOFNumbering.svelte, /src/components/dsm/Step6Partitioning.svelte, /src/components/dsm/Step7Solution.svelte, /src/components/dsm/Step8Reactions.svelte, /src/components/dsm/Step9InternalForces.svelte, /src/components/dsm/MatrixExplorer.svelte, /src/components/toolbar/ToolbarConfig.svelte, /src/components/SelectionPanel.svelte, /src/components/toolbar/ToolbarResults.svelte, /src/components/toolbar/ToolbarAdvanced.svelte, /src/components/KinematicPanel.svelte, /src/components/WhatIfPanel.svelte, /src/components/toolbar/ToolbarProject.svelte, /src/components/DataTable.svelte, /src/components/SectionStressPanel.svelte, /src/components/floating-tools/ToolSupportOptions.svelte, /src/components/floating-tools/ToolNodeOptions.svelte, /src/components/BlockPanel.svelte, /src/components/floating-tools/ToolElementOptions.svelte, /src/components/floating-tools/ToolLoadOptions.svelte, /src/components/floating-tools/SelectedEntityPanel.svelte, /src/components/tables/ResultsTable.svelte, /src/components/CalcReportDialog.svelte, /src/components/toolbar/ToolbarExamples.svelte, /src/components/tables/SupportsTable.svelte, /src/components/tables/ElementsTable.svelte, /src/components/tables/LoadsTable.svelte, /src/components/tables/NodesTable.svelte, /src/components/tables/SectionsTable.svelte, /src/components/tables/MaterialsTable.svelte, /src/components/stress/CrossSectionDrawing.svelte, /src/components/stress/StressTensorDetails.svelte, /src/components/stress/TorsionDetails.svelte, /src/components/stress/MohrCircleDisplay.svelte, /src/components/stress/StressStateDetails.svelte, /src/components/DemoMenu.svelte, /src/components/tables/CombosTable.svelte, /src/components/MaterialPresetSelector.svelte, /src/components/SectionChanger.svelte, /src/components/SelectionFilterBar.svelte, /src/components/dsm/MatrixDisplay.svelte, /src/components/stress/CentralCoreDetails.svelte, /src/components/stress/GeometricPropertyWorking.svelte, /src/components/property/PairingNote.svelte
+오전 9:33:10 [vite] (client) page reload e2e/.report/index.html
+오전 9:33:42 [vite] (client) page reload e2e/.report/index.html
+오전 9:40:11 [vite] (client) page reload e2e/.report/index.html
+오전 9:40:11 [vite] (client) page reload e2e/.report/trace/index.html
+오전 9:40:11 [vite] (client) page reload e2e/.report/trace/snapshot.html
+오전 9:40:11 [vite] (client) page reload e2e/.report/trace/uiMode.html
+오전 9:42:41 [vite] (client) hmr update /src/components/SelectionFilterBar.svelte, /src/components/SelectionFilterBar.svelte?svelte&type=style&lang.css
+오전 9:42:55 [vite] (client) hmr update /src/App.svelte, /src/components/StatusBar.svelte, /src/components/NodeEditor.svelte, /src/components/Viewport.svelte, /src/components/ElementEditor.svelte, /src/components/DespieceInspector.svelte, /src/components/SectionEditor.svelte, /src/components/MaterialEditor.svelte, /src/components/dsm/StepWizard.svelte, /src/components/DxfImportDialog.svelte, /src/components/ribbon/BasicPanel.svelte, /src/components/ribbon/ToolOptionsBar.svelte, /src/components/stress/StressPickHint.svelte, /src/components/ColourScaleLegend.svelte, /src/components/ribbon/Ribbon.svelte, /src/components/TabBar.svelte, /src/components/KeyboardShortcuts.svelte, /src/components/TourOverlay.svelte, /src/components/HelpOverlay.svelte, /src/components/ContextMenu.svelte, /src/components/ProfileSelector.svelte, /src/components/dsm/Step4Assembly.svelte, /src/components/dsm/Step2LocalMatrices.svelte, /src/components/dsm/Step3Transformation.svelte, /src/components/dsm/Step5LoadVector.svelte, /src/components/dsm/Step1DOFNumbering.svelte, /src/components/dsm/Step6Partitioning.svelte, /src/components/dsm/Step7Solution.svelte, /src/components/dsm/Step8Reactions.svelte, /src/components/dsm/Step9InternalForces.svelte, /src/components/dsm/MatrixExplorer.svelte, /src/components/toolbar/ToolbarConfig.svelte, /src/components/SelectionPanel.svelte, /src/components/toolbar/ToolbarResults.svelte, /src/components/toolbar/ToolbarAdvanced.svelte, /src/components/KinematicPanel.svelte, /src/components/WhatIfPanel.svelte, /src/components/toolbar/ToolbarProject.svelte, /src/components/DataTable.svelte, /src/components/SectionStressPanel.svelte, /src/components/floating-tools/ToolSupportOptions.svelte, /src/components/floating-tools/ToolNodeOptions.svelte, /src/components/BlockPanel.svelte, /src/components/floating-tools/ToolElementOptions.svelte, /src/components/floating-tools/ToolLoadOptions.svelte, /src/components/floating-tools/SelectedEntityPanel.svelte, /src/components/tables/ResultsTable.svelte, /src/components/CalcReportDialog.svelte, /src/components/toolbar/ToolbarExamples.svelte, /src/components/tables/SupportsTable.svelte, /src/components/tables/ElementsTable.svelte, /src/components/tables/LoadsTable.svelte, /src/components/tables/NodesTable.svelte, /src/components/tables/SectionsTable.svelte, /src/components/tables/MaterialsTable.svelte, /src/components/stress/CrossSectionDrawing.svelte, /src/components/stress/StressTensorDetails.svelte, /src/components/stress/TorsionDetails.svelte, /src/components/stress/MohrCircleDisplay.svelte, /src/components/stress/StressStateDetails.svelte, /src/components/DemoMenu.svelte, /src/components/tables/CombosTable.svelte, /src/components/MaterialPresetSelector.svelte, /src/components/SectionChanger.svelte, /src/components/SelectionFilterBar.svelte, /src/components/dsm/MatrixDisplay.svelte, /src/components/stress/CentralCoreDetails.svelte, /src/components/stress/GeometricPropertyWorking.svelte, /src/components/property/PairingNote.svelte
+오전 9:42:56 [vite] (client) hmr update /src/App.svelte, /src/components/StatusBar.svelte, /src/components/NodeEditor.svelte, /src/components/Viewport.svelte, /src/components/ElementEditor.svelte, /src/components/DespieceInspector.svelte, /src/components/SectionEditor.svelte, /src/components/MaterialEditor.svelte, /src/components/dsm/StepWizard.svelte, /src/components/DxfImportDialog.svelte, /src/components/ribbon/BasicPanel.svelte, /src/components/ribbon/ToolOptionsBar.svelte, /src/components/stress/StressPickHint.svelte, /src/components/ColourScaleLegend.svelte, /src/components/ribbon/Ribbon.svelte, /src/components/TabBar.svelte, /src/components/KeyboardShortcuts.svelte, /src/components/TourOverlay.svelte, /src/components/HelpOverlay.svelte, /src/components/ContextMenu.svelte, /src/components/ProfileSelector.svelte, /src/components/dsm/Step4Assembly.svelte, /src/components/dsm/Step2LocalMatrices.svelte, /src/components/dsm/Step3Transformation.svelte, /src/components/dsm/Step5LoadVector.svelte, /src/components/dsm/Step1DOFNumbering.svelte, /src/components/dsm/Step6Partitioning.svelte, /src/components/dsm/Step7Solution.svelte, /src/components/dsm/Step8Reactions.svelte, /src/components/dsm/Step9InternalForces.svelte, /src/components/dsm/MatrixExplorer.svelte, /src/components/toolbar/ToolbarConfig.svelte, /src/components/SelectionPanel.svelte, /src/components/toolbar/ToolbarResults.svelte, /src/components/toolbar/ToolbarAdvanced.svelte, /src/components/KinematicPanel.svelte, /src/components/WhatIfPanel.svelte, /src/components/toolbar/ToolbarProject.svelte, /src/components/DataTable.svelte, /src/components/SectionStressPanel.svelte, /src/components/floating-tools/ToolSupportOptions.svelte, /src/components/floating-tools/ToolNodeOptions.svelte, /src/components/BlockPanel.svelte, /src/components/floating-tools/ToolElementOptions.svelte, /src/components/floating-tools/ToolLoadOptions.svelte, /src/components/floating-tools/SelectedEntityPanel.svelte, /src/components/tables/ResultsTable.svelte, /src/components/CalcReportDialog.svelte, /src/components/toolbar/ToolbarExamples.svelte, /src/components/tables/SupportsTable.svelte, /src/components/tables/ElementsTable.svelte, /src/components/tables/LoadsTable.svelte, /src/components/tables/NodesTable.svelte, /src/components/tables/SectionsTable.svelte, /src/components/tables/MaterialsTable.svelte, /src/components/stress/CrossSectionDrawing.svelte, /src/components/stress/StressTensorDetails.svelte, /src/components/stress/TorsionDetails.svelte, /src/components/stress/MohrCircleDisplay.svelte, /src/components/stress/StressStateDetails.svelte, /src/components/DemoMenu.svelte, /src/components/tables/CombosTable.svelte, /src/components/MaterialPresetSelector.svelte, /src/components/SectionChanger.svelte, /src/components/SelectionFilterBar.svelte, /src/components/dsm/MatrixDisplay.svelte, /src/components/stress/CentralCoreDetails.svelte, /src/components/stress/GeometricPropertyWorking.svelte, /src/components/property/PairingNote.svelte
+오전 9:46:33 [vite-plugin-svelte] src/components/BlockPanel.svelte:44:2 `<div>` with a click or contextmenu handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 9:46:33 [vite-plugin-svelte] src/components/BlockPanel.svelte:59:2 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 9:46:33 [vite-plugin-svelte] src/components/BlockPanel.svelte:60:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오전 9:46:33 [vite-plugin-svelte] src/components/BlockPanel.svelte:66:78 Avoid using autofocus
+https://svelte.dev/e/a11y_autofocus
+오전 9:46:33 [vite] (client) hmr update /src/components/BlockPanel.svelte?svelte&type=style&lang.css
+오후 1:10:25 [vite-plugin-svelte] src/components/BlockPanel.svelte:44:2 `<div>` with a click or contextmenu handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오후 1:10:25 [vite-plugin-svelte] src/components/BlockPanel.svelte:59:2 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오후 1:10:25 [vite-plugin-svelte] src/components/BlockPanel.svelte:60:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+오후 1:10:25 [vite-plugin-svelte] src/components/BlockPanel.svelte:66:78 Avoid using autofocus
+https://svelte.dev/e/a11y_autofocus

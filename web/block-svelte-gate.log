@@ -1,0 +1,24 @@
+
+> stabileo-web@0.1.0 check:gate
+> node scripts/svelte-check-gate.mjs
+
+(node:26800) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+
+svelte-check gate — guarded paths:
+  src/components/edu/
+  src/lib/engine/kinematic-2d.ts
+  src/lib/engine/solve-diagnostics.ts
+  src/lib/geometry/coordinate-system.ts
+  src/lib/section/
+  src/components/SectionStressPanel.svelte
+  src/components/stress/CrossSectionDrawing.svelte
+  src/lib/data/section-catalog.ts
+  src/components/SectionChanger.svelte
+  src/components/ProfileSelector.svelte
+  src/components/tables/SectionsTable.svelte
+
+Repository-wide: 333 errors, 83 warnings across 925 files (informational — run `npm run check` for detail).
+
+✓ No errors in guarded paths.
+

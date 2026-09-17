@@ -1,0 +1,757 @@
+
+> stabileo-web@0.1.0 build:only
+> vite build
+
+vite v6.4.1 building for production...
+transforming...
+PM 7:56:38 [vite-plugin-svelte] src/App.svelte:160:102 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+158: <DxfImportDialog open={showDxfImport} file={dxfImportFile} onclose={() => { showDxfImport = false; dxfImportFile = null; }} />
+159: <input bind:this={dxfFileInput} type="file" accept=".dxf" style="display:none" onchange={(e) => { const f = (e.currentTarget as HTMLInputElement).files?.[0]; if (f) { dxfImportFile = f; showDxfImport = true; } (e.currentTarget as HTMLInputElement).value = ''; }} />
+160: {#if showImportDialog}<div class="help-overlay" role="dialog" aria-label={t('app.importCoordinates')}><div class="help-backdrop" onclick={() => showImportDialog = false}></div><div class="help-content"><div class="help-header"><h2>{t('app.importCoordinates')}</h2><button class="help-close" onclick={() => showImportDialog = false}>✕</button></div><p>{t('app.importCoordDesc')}</p><textarea class="import-textarea" placeholder="0, 0&#10;5, 0&#10;10, 0&#10;5, 3" bind:value={importText} rows="10"></textarea><div class="dialog-actions"><button class="btn btn-primary" onclick={handleImportCoordinates}>{t('app.import')}</button><button class="btn btn-secondary" onclick={() => showImportDialog = false}>{t('app.cancel')}</button></div></div></div>{/if}
+                                                                                                                                                                                     ^
+161: <TourOverlay />
+162: <style>
+PM 7:56:38 [vite-plugin-svelte] src/App.svelte:160:102 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+158: <DxfImportDialog open={showDxfImport} file={dxfImportFile} onclose={() => { showDxfImport = false; dxfImportFile = null; }} />
+159: <input bind:this={dxfFileInput} type="file" accept=".dxf" style="display:none" onchange={(e) => { const f = (e.currentTarget as HTMLInputElement).files?.[0]; if (f) { dxfImportFile = f; showDxfImport = true; } (e.currentTarget as HTMLInputElement).value = ''; }} />
+160: {#if showImportDialog}<div class="help-overlay" role="dialog" aria-label={t('app.importCoordinates')}><div class="help-backdrop" onclick={() => showImportDialog = false}></div><div class="help-content"><div class="help-header"><h2>{t('app.importCoordinates')}</h2><button class="help-close" onclick={() => showImportDialog = false}>✕</button></div><p>{t('app.importCoordDesc')}</p><textarea class="import-textarea" placeholder="0, 0&#10;5, 0&#10;10, 0&#10;5, 3" bind:value={importText} rows="10"></textarea><div class="dialog-actions"><button class="btn btn-primary" onclick={handleImportCoordinates}>{t('app.import')}</button><button class="btn btn-secondary" onclick={() => showImportDialog = false}>{t('app.cancel')}</button></div></div></div>{/if}
+                                                                                                                                                                                     ^
+161: <TourOverlay />
+162: <style>
+PM 7:56:38 [vite-plugin-svelte] src/components/ElementEditor.svelte:104:2 `<div>` with a keydown handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+102:   <!-- svelte-ignore a11y_no_static_element_interactions -->
+103:   <div class="backdrop" onclick={close}></div>
+104:   <div class="editor" bind:this={editorEl} style="left: {pos.x}px; top: {pos.y}px;" onkeydown={handleKeydown}>
+             ^
+105:     <div class="title">{t('editor.element')} {elemId}</div>
+106: 
+PM 7:56:38 [vite-plugin-svelte] src/components/DxfImportDialog.svelte:164:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+162: {#if open}
+163:   <div class="dxf-overlay">
+164:     <div class="dxf-backdrop" onclick={onclose}></div>
+                                                           ^
+165:     <div class="dxf-dialog">
+166:       <div class="dxf-header">
+PM 7:56:38 [vite-plugin-svelte] src/components/DxfImportDialog.svelte:164:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+162: {#if open}
+163:   <div class="dxf-overlay">
+164:     <div class="dxf-backdrop" onclick={onclose}></div>
+                                                           ^
+165:     <div class="dxf-dialog">
+166:       <div class="dxf-header">
+PM 7:56:38 [vite-plugin-svelte] src/components/DxfImportDialog.svelte:182:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+180:         <div class="dxf-options">
+181:           <div class="dxf-field">
+182:             <label>{t('dxf.units')}</label>
+                                                ^
+183:             <select value={unit} onchange={handleUnitChange}>
+184:               <option value="m">{t('dxf.meters')}</option>
+PM 7:56:38 [vite-plugin-svelte] src/components/DxfImportDialog.svelte:190:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+188:           </div>
+189:           <div class="dxf-field">
+190:             <label>{t('dxf.snapTolerance')}</label>
+                                                        ^
+191:             <input type="number" step="0.001" min="0.001" value={snapTolerance} onchange={handleToleranceChange} />
+192:           </div>
+PM 7:56:38 [vite-plugin-svelte] src/components/ribbon/Ribbon.svelte:578:2 Unused CSS selector ".rb-cmd.prominent"
+https://svelte.dev/e/css_unused_selector
+576:      icon-plus-label pairs beside it occupy and a larger glyph to fill it.
+577:   */
+578:   .rb-cmd.prominent {
+                        ^
+579:     justify-content: center;
+580:     align-self: stretch;
+PM 7:56:38 [vite-plugin-svelte] src/components/ribbon/Ribbon.svelte:584:2 Unused CSS selector ".rb-cmd.prominent :global(svg)"
+https://svelte.dev/e/css_unused_selector
+582:   }
+583: 
+584:   .rb-cmd.prominent :global(svg) {
+                                     ^
+585:     width: 30px;
+586:     height: 30px;
+PM 7:56:38 [vite-plugin-svelte] src/components/TabBar.svelte:54:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+52: <div class="tab-bar" bind:this={tabBarEl}>
+53:   {#each tabManager.tabs as tab (tab.id)}
+54:     <div
+             ^
+55:       class="tab"
+56:       class:active={tab.id === tabManager.activeTabId}
+PM 7:56:39 [vite-plugin-svelte] src/components/HelpOverlay.svelte:16:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+14: {#if uiStore.showHelp}
+15:   <div class="help-overlay" role="dialog" aria-label={t('help.title')}>
+16:     <div class="help-backdrop" onclick={() => uiStore.showHelp = false}></div>
+                                                                                  ^
+17:     <div class="help-content">
+18:       <div class="help-header">
+PM 7:56:39 [vite-plugin-svelte] src/components/HelpOverlay.svelte:16:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+14: {#if uiStore.showHelp}
+15:   <div class="help-overlay" role="dialog" aria-label={t('help.title')}>
+16:     <div class="help-backdrop" onclick={() => uiStore.showHelp = false}></div>
+                                                                                  ^
+17:     <div class="help-content">
+18:       <div class="help-header">
+PM 7:56:39 [vite-plugin-svelte] src/components/ContextMenu.svelte:65:2 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+63: 
+64: {#if uiStore.contextMenu}
+65:   <div class="ctx-backdrop" onclick={closeContextMenu} oncontextmenu={(e) => { e.preventDefault(); closeContextMenu(); }}></div>
+                                                                                                                                    ^
+66:   <div class="ctx-menu" style="left: {uiStore.contextMenu.x}px; top: {uiStore.contextMenu.y}px">
+67:     {#if uiStore.contextMenu.nodeId != null}
+PM 7:56:39 [vite-plugin-svelte] src/components/ContextMenu.svelte:65:2 `<div>` with a click or contextmenu handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+63: 
+64: {#if uiStore.contextMenu}
+65:   <div class="ctx-backdrop" onclick={closeContextMenu} oncontextmenu={(e) => { e.preventDefault(); closeContextMenu(); }}></div>
+                                                                                                                                    ^
+66:   <div class="ctx-menu" style="left: {uiStore.contextMenu.x}px; top: {uiStore.contextMenu.y}px">
+67:     {#if uiStore.contextMenu.nodeId != null}
+
+new URL("../wasm/dedaliano_engine_bg.wasm", import.meta.url) doesn't exist at build time, it will remain unchanged to be resolved at runtime. If this is intended, you can use the /* @vite-ignore */ comment to suppress this warning.
+PM 7:56:39 [vite-plugin-svelte] src/components/ProfileSelector.svelte:44:2 Elements with the 'dialog' interactive role must have a tabindex value
+https://svelte.dev/e/a11y_interactive_supports_focus
+42: 
+43: {#if open}
+44:   <div class="profile-overlay" role="dialog" aria-label={t('dialog.profileSelector')} onkeydown={handleKeydown}>
+            ^
+45:     <div class="profile-backdrop" onclick={onclose}></div>
+46:     <div class="profile-modal">
+PM 7:56:39 [vite-plugin-svelte] src/components/ProfileSelector.svelte:45:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+43: {#if open}
+44:   <div class="profile-overlay" role="dialog" aria-label={t('dialog.profileSelector')} onkeydown={handleKeydown}>
+45:     <div class="profile-backdrop" onclick={onclose}></div>
+                                                              ^
+46:     <div class="profile-modal">
+47:       <div class="profile-header">
+PM 7:56:39 [vite-plugin-svelte] src/components/ProfileSelector.svelte:45:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+43: {#if open}
+44:   <div class="profile-overlay" role="dialog" aria-label={t('dialog.profileSelector')} onkeydown={handleKeydown}>
+45:     <div class="profile-backdrop" onclick={onclose}></div>
+                                                              ^
+46:     <div class="profile-modal">
+47:       <div class="profile-header">
+PM 7:56:39 [vite-plugin-svelte] src/components/dsm/Step2LocalMatrices.svelte:87:2 Unused CSS selector ".formula-note"
+https://svelte.dev/e/css_unused_selector
+85:   .prop-val { font-size: 0.65rem; color: var(--st-text); font-family: 'Courier New', monospace; }
+86: 
+87:   .formula-note {
+                   ^
+88:     font-size: 0.65rem; color: var(--st-info);
+89:     background: var(--st-surface-2); padding: 0.4rem 0.6rem;
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:158:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+156:       {#if resultsStore.diagramType === 'deformed'}
+157:         <div class="input-group">
+158:           <label>{t('results.diagramScale')}:</label>
+                                                          ^
+159:           <button class="scale-step-btn" onclick={() => resultsStore.deformedScale = Math.max(1, resultsStore.deformedScale - (resultsStore.deformedScale <= 10 ? 1 : resultsStore.deformedScale <= 100 ? 5 : 50))} title={t('results.decreaseScale')}>◀</button>
+160:           <input type="range" min="1" max="1000" step="1" bind:value={resultsStore.deformedScale} style="width: 80px" />
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:166:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+164:       {:else if resultsStore.diagramType !== 'none' && resultsStore.diagramType !== 'colorMap' && resultsStore.diagramType !== 'axialColor'}
+165:         <div class="input-group">
+166:           <label>{t('results.diagramScale')}:</label>
+                                                          ^
+167:           <button class="scale-step-btn" onclick={() => resultsStore.diagramScale = Math.max(0.1, +(resultsStore.diagramScale - 0.1).toFixed(1))} title={t('results.decreaseScale')}>◀</button>
+168:           <input type="range" min="0.1" max="5" step="0.1" bind:value={resultsStore.diagramScale} style="width: 80px" />
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:180:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+178:         {#if resultsStore.animateDeformed}
+179:           <div class="input-group">
+180:             <label>{t('results.speed')}:</label>
+                                                     ^
+181:             <input type="range" min="0.25" max="3" step="0.25" bind:value={resultsStore.animSpeed} style="width: 80px" />
+182:             <span style="font-size: 0.7rem; color: #888">{resultsStore.animSpeed.toFixed(2)}x</span>
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:193:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+191:         {#if resultsStore.ilAnimating}
+192:           <div class="input-group">
+193:             <label>{t('results.speed')}:</label>
+                                                     ^
+194:             <input type="range" min="0.25" max="3" step="0.25" bind:value={resultsStore.ilAnimSpeed} style="width: 80px" />
+195:             <span style="font-size: 0.7rem; color: #888">{resultsStore.ilAnimSpeed.toFixed(2)}x</span>
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:227:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+225:         {@const measure = activeMapMeasure()!}
+226:         <div class="input-group">
+227:           <label>{t('results.stressMeasure')}:</label>
+                                                           ^
+228:           <select value={measure} onchange={(e) => showStressMap(e.currentTarget.value as MapMeasure)}>
+229:             <option value="stressRatio">{t('results.measureUtilisation')}</option>
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:283:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+281:           {@const how = activeRepresentation()}
+282:           <div class="input-group">
+283:             <label>{t('results.shownAs')}:</label>
+                                                       ^
+284:             <div class="seg" role="group" aria-label={t('results.shownAs')}>
+285:               {#each representationsFor(shownQuantity) as rep}
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:427:18 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+425:               {#if showsSecondary}
+426:                 <div class="input-group">
+427:                   <label>{t('results.compare')}:</label>
+                                                             ^
+428:                   <select onchange={(e) => {
+429:                     const val = (e.target as HTMLSelectElement).value;
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarResults.svelte:523:2 Unused CSS selector ".results-table-block"
+https://svelte.dev/e/css_unused_selector
+521:   }
+522: 
+523:   .results-table-block { margin-top: 6px; }
+                           ^
+524:   /* The table brings its own scroll: the toolbar is a strip and a hundred rows
+525:      of member forces must not stretch it. */
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:87:53 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+85:           </label>
+86:           <div class="input-group">
+87:             <HelpTip text={t('config.tip.gridSize')}><label>{`${t('config.gridSize')} (${ul('length')})`}:</label></HelpTip>
+                                                                                                                      ^
+88:             <input
+89:               type="number"
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:146:48 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+144:           </label>
+145:         <div class="input-group">
+146:           <HelpTip text={t('config.tip.units')}><label>{t('config.units')}:</label></HelpTip>
+                                                                                        ^
+147:           <select bind:value={uiStore.unitSystem}>
+148:             <option value="SI">{t('config.unitSI')}</option>
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:154:53 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+152:         </div>
+153:         <div class="input-group">
+154:           <HelpTip text={t('config.tip.stressUnit')}><label>{t('config.stressUnit')}:</label></HelpTip>
+                                                                                                  ^
+155:           <select bind:value={uiStore.stressUnit}>
+156:             <option value="MPa">MPa</option>
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:161:48 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+159:         </div>
+160:         <div class="input-group">
+161:           <HelpTip text={t('config.tip.color')}><label>{t('config.color')}:</label></HelpTip>
+                                                                                        ^
+162:           <select bind:value={uiStore.elementColorMode}>
+163:             <option value="uniform">{t('config.uniform')}</option>
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:373:2 Unused CSS selector "input[type="radio"]"
+https://svelte.dev/e/css_unused_selector
+371:   }
+372: 
+373:   input[type="radio"],
+                          ^
+374:   input[type="checkbox"] {
+375:     accent-color: var(--st-accent);
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:378:2 Unused CSS selector ".help-hint"
+https://svelte.dev/e/css_unused_selector
+376:   }
+377: 
+378:   .help-hint {
+                 ^
+379:     display: inline-flex;
+380:     align-items: center;
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarConfig.svelte:392:2 Unused CSS selector ".help-hint:hover"
+https://svelte.dev/e/css_unused_selector
+390:     flex-shrink: 0;
+391:   }
+392:   .help-hint:hover {
+                       ^
+393:     border-color: var(--st-interactive);
+394:     color: var(--st-value);
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarAdvanced.svelte:892:2 Unused CSS selector ".flat .il-sub-panel"
+https://svelte.dev/e/css_unused_selector
+890:   /* Sub-controls belong to the analysis above them, and should look it. */
+891:   .flat .envelope-sub-panel,
+892:   .flat .il-sub-panel {
+                          ^
+893:     margin-left: 0.6rem;
+894:     padding-left: 0.6rem;
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarProject.svelte:378:2 Unused CSS selector ".small-btn"
+https://svelte.dev/e/css_unused_selector
+376:   }
+377: 
+378:   .small-btn {
+                 ^
+379:     padding: 0.1rem 0.4rem;
+380:     border: 1px solid var(--st-hair-strong);
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarProject.svelte:388:2 Unused CSS selector ".small-btn:hover:not(:disabled)"
+https://svelte.dev/e/css_unused_selector
+386:   }
+387: 
+388:   .small-btn:hover:not(:disabled) {
+                                      ^
+389:     background: var(--st-surface-3);
+390:     color: white;
+PM 7:56:39 [vite-plugin-svelte] src/components/toolbar/ToolbarProject.svelte:393:2 Unused CSS selector ".small-btn:disabled"
+https://svelte.dev/e/css_unused_selector
+391:   }
+392: 
+393:   .small-btn:disabled {
+                          ^
+394:     opacity: 0.4;
+395:     cursor: default;
+PM 7:56:39 [vite-plugin-svelte] src/components/WhatIfPanel.svelte:200:12 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+198:         {#each loadFactors as factor, i}
+199:           <div class="wif-slider-row">
+200:             <label class="wif-label" title={loadLabel(i)}>{loadLabel(i)}</label>
+                                                                                     ^
+201:             <input
+202:               type="range"
+PM 7:56:39 [vite-plugin-svelte] src/components/WhatIfPanel.svelte:217:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+215:         <div class="wif-section-title">{t('whatif.material')}</div>
+216:         <div class="wif-slider-row">
+217:           <label class="wif-label">E</label>
+                                                 ^
+218:           <input
+219:             type="range"
+PM 7:56:39 [vite-plugin-svelte] src/components/WhatIfPanel.svelte:234:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+232:         <div class="wif-section-title">{t('whatif.section')}</div>
+233:         <div class="wif-slider-row">
+234:           <label class="wif-label">A</label>
+                                                 ^
+235:           <input
+236:             type="range"
+PM 7:56:39 [vite-plugin-svelte] src/components/WhatIfPanel.svelte:247:10 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+245: 
+246:         <div class="wif-slider-row">
+247:           <label class="wif-label">Iz</label>
+                                                  ^
+248:           <input
+249:             type="range"
+PM 7:56:39 [vite-plugin-svelte] src/components/DataTable.svelte:61:0 Non-interactive element `<div>` should not be assigned mouse or keyboard event listeners
+https://svelte.dev/e/a11y_no_noninteractive_element_interactions
+59: </script>
+60: 
+61: <div class="data-table" onkeydown={handleKeydown} role="region">
+          ^
+62:   <div class="tabs">
+63:     <button class:active={activeTab === 'nodes'} onclick={() => pickTab('nodes')}>
+PM 7:56:39 [vite-plugin-svelte] src/components/floating-tools/ToolNodeOptions.svelte:94:2 Unused CSS selector ".ft-input-group"
+https://svelte.dev/e/css_unused_selector
+92:   }
+93: 
+94:   .ft-input-group {
+                     ^
+95:     display: flex;
+96:     align-items: center;
+PM 7:56:39 [vite-plugin-svelte] src/components/floating-tools/ToolNodeOptions.svelte:102:2 Unused CSS selector ".ft-input-group input"
+https://svelte.dev/e/css_unused_selector
+100:   }
+101: 
+102:   .ft-input-group input {
+                            ^
+103:     width: 55px;
+104:     padding: 2px 4px;
+PM 7:56:39 [vite-plugin-svelte] src/components/floating-tools/ToolNodeOptions.svelte:112:2 Unused CSS selector ".ft-unit"
+https://svelte.dev/e/css_unused_selector
+110:   }
+111: 
+112:   .ft-unit {
+               ^
+113:     font-size: 0.6rem;
+114:     color: var(--st-text-3);
+PM 7:56:39 [vite-plugin-svelte] src/components/floating-tools/ToolSupportOptions.svelte:165:2 Unused CSS selector ".ft-chk"
+https://svelte.dev/e/css_unused_selector
+163:   }
+164: 
+165:   .ft-chk {
+              ^
+166:     display: inline-flex;
+167:     align-items: center;
+PM 7:56:39 [vite-plugin-svelte] src/components/floating-tools/ToolSupportOptions.svelte:174:2 Unused CSS selector ".ft-chk input"
+https://svelte.dev/e/css_unused_selector
+172:     white-space: nowrap;
+173:   }
+174:   .ft-chk input {
+                    ^
+175:     accent-color: var(--st-accent);
+176:     margin: 0;
+PM 7:56:39 [vite-plugin-svelte] src/components/floating-tools/ToolSupportOptions.svelte:180:2 Unused CSS selector ".ft-chk span"
+https://svelte.dev/e/css_unused_selector
+178:     height: 13px;
+179:   }
+180:   .ft-chk span {
+                   ^
+181:     font-size: 0.65rem;
+182:   }
+PM 7:56:39 [vite-plugin-svelte] src/components/floating-tools/ToolSupportOptions.svelte:228:2 Unused CSS selector ".ft-hint"
+https://svelte.dev/e/css_unused_selector
+226:   }
+227: 
+228:   .ft-hint {
+               ^
+229:     font-size: 0.65rem;
+230:     color: var(--st-text-3);
+PM 7:56:39 [vite-plugin-svelte] src/components/floating-tools/SelectedEntityPanel.svelte:409:2 Unused CSS selector ".ft-chk"
+https://svelte.dev/e/css_unused_selector
+407:   }
+408: 
+409:   .ft-chk {
+              ^
+410:     display: inline-flex;
+411:     align-items: center;
+PM 7:56:39 [vite-plugin-svelte] src/components/floating-tools/SelectedEntityPanel.svelte:418:2 Unused CSS selector ".ft-chk input"
+https://svelte.dev/e/css_unused_selector
+416:     white-space: nowrap;
+417:   }
+418:   .ft-chk input {
+                    ^
+419:     accent-color: var(--st-accent);
+420:     margin: 0;
+PM 7:56:39 [vite-plugin-svelte] src/components/floating-tools/SelectedEntityPanel.svelte:424:2 Unused CSS selector ".ft-chk span"
+https://svelte.dev/e/css_unused_selector
+422:     height: 13px;
+423:   }
+424:   .ft-chk span {
+                   ^
+425:     font-size: 0.65rem;
+426:   }
+[plugin vite:resolve] Module "fs" has been externalized for browser compatibility, imported by "D:/Documents/coding/Calcsta/web/src/lib/engine/wasm-solver.ts". See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.
+[plugin vite:resolve] Module "url" has been externalized for browser compatibility, imported by "D:/Documents/coding/Calcsta/web/src/lib/engine/wasm-solver.ts". See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.
+PM 7:56:40 [vite-plugin-svelte] src/lib/store/model.svelte.ts:243:2 This reference only captures the initial value of `nextId`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+241:   model.materials.set(1, defaultMaterial);
+242:   model.sections.set(1, defaultSection);
+243:   nextId.material = 2;
+             ^
+244:   nextId.section = 2;
+245:   let _pushUndo = null;
+PM 7:56:40 [vite-plugin-svelte] src/lib/store/model.svelte.ts:244:2 This reference only captures the initial value of `nextId`. Did you mean to reference it inside a closure instead?
+https://svelte.dev/e/state_referenced_locally
+242:   model.sections.set(1, defaultSection);
+243:   nextId.material = 2;
+244:   nextId.section = 2;
+             ^
+245:   let _pushUndo = null;
+246:   let _pushUndoSilent = null;
+src/lib/store/ui.svelte.ts (463:9): A comment
+
+"/* @__PURE__ */"
+
+in "src/lib/store/ui.svelte.ts" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+PM 7:56:40 [vite-plugin-svelte] src/components/dsm/VectorDisplay.svelte:34:8 `<tr>` cannot be a child of `<table>`. `<table>` only allows these children: `<caption>`, `<colgroup>`, `<tbody>`, `<thead>`, `<tfoot>`, `<style>`, `<script>`, `<template>`. When rendering this component on the server, the resulting HTML will be modified by the browser (by moving, removing, or inserting elements), likely resulting in a `hydration_mismatch` warning
+https://svelte.dev/e/node_invalid_placement_ssr
+32:     {#if horizontal}
+33:       {#if labels.length > 0}
+34:         <tr>
+                 ^
+35:           {#each labels as label, i}
+36:             <th class:hl={highlightIndices.has(i)}>{label}</th>
+PM 7:56:40 [vite-plugin-svelte] src/components/dsm/VectorDisplay.svelte:40:6 `<tr>` cannot be a child of `<table>`. `<table>` only allows these children: `<caption>`, `<colgroup>`, `<tbody>`, `<thead>`, `<tfoot>`, `<style>`, `<script>`, `<template>`. When rendering this component on the server, the resulting HTML will be modified by the browser (by moving, removing, or inserting elements), likely resulting in a `hydration_mismatch` warning
+https://svelte.dev/e/node_invalid_placement_ssr
+38:         </tr>
+39:       {/if}
+40:       <tr>
+               ^
+41:         {#each vector as val, i}
+42:           <td class:hl={highlightIndices.has(i)} class:pos={val > 1e-10} class:neg={val < -1e-10} class:zero={Math.abs(val) <= 1e-10}>
+PM 7:56:40 [vite-plugin-svelte] src/components/dsm/VectorDisplay.svelte:49:8 `<tr>` cannot be a child of `<table>`. `<table>` only allows these children: `<caption>`, `<colgroup>`, `<tbody>`, `<thead>`, `<tfoot>`, `<style>`, `<script>`, `<template>`. When rendering this component on the server, the resulting HTML will be modified by the browser (by moving, removing, or inserting elements), likely resulting in a `hydration_mismatch` warning
+https://svelte.dev/e/node_invalid_placement_ssr
+47:     {:else}
+48:       {#each vector as val, i}
+49:         <tr>
+                 ^
+50:           {#if labels.length > 0}
+51:             <th class:hl={highlightIndices.has(i)}>{labels[i] ?? ''}</th>
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/ResultsTable.svelte:271:2 Unused CSS selector ".combo-view-tabs"
+https://svelte.dev/e/css_unused_selector
+269:   }
+270: 
+271:   .combo-view-tabs {
+                       ^
+272:     background: var(--st-surface-2) !important;
+273:   }
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/ResultsTable.svelte:274:2 Unused CSS selector ".combo-view-tabs button.active"
+https://svelte.dev/e/css_unused_selector
+272:     background: var(--st-surface-2) !important;
+273:   }
+274:   .combo-view-tabs button.active {
+                                     ^
+275:     color: var(--st-accent) !important;
+276:     border-bottom-color: var(--st-accent) !important;
+PM 7:56:40 [vite-plugin-svelte] src/components/HelpTip.svelte:83:0 `<span>` with a mouseenter or mouseleave handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+81: </script>
+82: 
+83: <span
+          ^
+84:   class="ht-wrap"
+85:   onmouseenter={arm}
+PM 7:56:40 [vite-plugin-svelte] src/components/CalcReportDialog.svelte:116:0 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+114: {#if open}
+115: <!-- svelte-ignore a11y_no_static_element_interactions -->
+116: <div class="dialog-overlay" onclick={() => open = false}>
+           ^
+117:   <!-- svelte-ignore a11y_no_static_element_interactions -->
+118:   <div class="dialog" onclick={(e) => e.stopPropagation()}>
+PM 7:56:40 [vite-plugin-svelte] src/components/CalcReportDialog.svelte:118:2 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+116: <div class="dialog-overlay" onclick={() => open = false}>
+117:   <!-- svelte-ignore a11y_no_static_element_interactions -->
+118:   <div class="dialog" onclick={(e) => e.stopPropagation()}>
+             ^
+119:     <h3>{t('calcReport.title')}</h3>
+120:     <div class="form">
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/ElementsTable.svelte:181:2 Unused CSS selector "td input[type="number"]"
+https://svelte.dev/e/css_unused_selector
+179:   }
+180: 
+181:   td input[type="number"] {
+                              ^
+182:     width: 55px;
+183:     padding: 0.1rem 0.2rem;
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/SupportsTable.svelte:171:2 Unused CSS selector ".dof-chk"
+https://svelte.dev/e/css_unused_selector
+169:   }
+170: 
+171:   .dof-chk {
+               ^
+172:     display: inline-flex;
+173:     align-items: center;
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/SupportsTable.svelte:180:2 Unused CSS selector ".dof-chk input"
+https://svelte.dev/e/css_unused_selector
+178:     white-space: nowrap;
+179:   }
+180:   .dof-chk input {
+                     ^
+181:     accent-color: var(--st-accent);
+182:     margin: 0;
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/SectionsTable.svelte:367:2 Unused CSS selector ".rot-input"
+https://svelte.dev/e/css_unused_selector
+365:   }
+366: 
+367:   .rot-input {
+                 ^
+368:     width: 38px !important;
+369:     text-align: center;
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/SectionsTable.svelte:393:2 Unused CSS selector ".name-with-action"
+https://svelte.dev/e/css_unused_selector
+391:   }
+392: 
+393:   .name-with-action {
+                        ^
+394:     display: flex;
+395:     align-items: center;
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/SectionsTable.svelte:399:2 Unused CSS selector ".name-with-action input"
+https://svelte.dev/e/css_unused_selector
+397:   }
+398: 
+399:   .name-with-action input {
+                              ^
+400:     flex: 1;
+401:     min-width: 0;
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/SectionsTable.svelte:459:2 Unused CSS selector ".ro-val"
+https://svelte.dev/e/css_unused_selector
+457:   }
+458: 
+459:   .ro-val {
+              ^
+460:     font-size: 0.7rem;
+461:     color: var(--st-text-3);
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/MaterialsTable.svelte:198:2 Unused CSS selector ".name-with-action"
+https://svelte.dev/e/css_unused_selector
+196:   }
+197: 
+198:   .name-with-action {
+                        ^
+199:     display: flex;
+200:     align-items: center;
+PM 7:56:40 [vite-plugin-svelte] src/components/tables/MaterialsTable.svelte:204:2 Unused CSS selector ".name-with-action input"
+https://svelte.dev/e/css_unused_selector
+202:   }
+203: 
+204:   .name-with-action input {
+                              ^
+205:     flex: 1;
+206:     min-width: 0;
+PM 7:56:41 [vite-plugin-svelte] src/components/SectionChanger.svelte:205:2 Elements with the 'dialog' interactive role must have a tabindex value
+https://svelte.dev/e/a11y_interactive_supports_focus
+203: 
+204: {#if open}
+205:   <div class="sc-overlay" role="dialog" aria-label={t('dialog.changeSection')} onkeydown={handleKeydown}>
+             ^
+206:     <div class="sc-backdrop" onclick={onclose}></div>
+207:     <div class="sc-modal">
+PM 7:56:41 [vite-plugin-svelte] src/components/SectionChanger.svelte:206:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+204: {#if open}
+205:   <div class="sc-overlay" role="dialog" aria-label={t('dialog.changeSection')} onkeydown={handleKeydown}>
+206:     <div class="sc-backdrop" onclick={onclose}></div>
+                                                          ^
+207:     <div class="sc-modal">
+208:       <div class="sc-header">
+PM 7:56:41 [vite-plugin-svelte] src/components/SectionChanger.svelte:206:4 `<div>` with a click handler must have an ARIA role
+https://svelte.dev/e/a11y_no_static_element_interactions
+204: {#if open}
+205:   <div class="sc-overlay" role="dialog" aria-label={t('dialog.changeSection')} onkeydown={handleKeydown}>
+206:     <div class="sc-backdrop" onclick={onclose}></div>
+                                                          ^
+207:     <div class="sc-modal">
+208:       <div class="sc-header">
+PM 7:56:41 [vite-plugin-svelte] src/components/SectionChanger.svelte:595:2 Unused CSS selector ".series-group"
+https://svelte.dev/e/css_unused_selector
+593: 
+594:   /* Series grouping: a heading and its families on one row of their own. */
+595:   .series-group {
+                    ^
+596:     display: flex;
+597:     align-items: baseline;
+PM 7:56:41 [vite-plugin-svelte] src/components/SectionChanger.svelte:716:2 Unused CSS selector ".profile-tabs"
+https://svelte.dev/e/css_unused_selector
+714: 
+715:   /* ─── Profile Selector Styles ─── */
+716:   .profile-tabs {
+                    ^
+717:     display: flex;
+718:     gap: 0.2rem;
+PM 7:56:41 [vite-plugin-svelte] src/components/SectionChanger.svelte:775:2 Unused CSS selector ".series-label"
+https://svelte.dev/e/css_unused_selector
+773:     color: var(--st-text-on-accent);
+774:   }
+775:   .series-label {
+                    ^
+776:     font-size: 0.62rem; color: var(--st-text-3); text-transform: uppercase;
+777:     letter-spacing: 0.05em; margin: 0 2px 0 8px; align-self: center;
+PM 7:56:41 [vite-plugin-svelte] src/components/SectionChanger.svelte:779:2 Unused CSS selector ".series-label:first-child"
+https://svelte.dev/e/css_unused_selector
+777:     letter-spacing: 0.05em; margin: 0 2px 0 8px; align-self: center;
+778:   }
+779:   .series-label:first-child { margin-left: 0; }
+                                ^
+780:   /* A family whose outline is approximate is marked in the picker itself, so
+781:      the limitation is visible before the profile is chosen, not after. */
+PM 7:56:41 [vite-plugin-svelte] src/components/SectionChanger.svelte:783:2 Unused CSS selector ".profile-head"
+https://svelte.dev/e/css_unused_selector
+781:      the limitation is visible before the profile is chosen, not after. */
+782:   .tab-btn.approx { border-bottom: 2px dotted var(--st-amber-text); }
+783:   .profile-head { display: flex; align-items: center; gap: 12px; padding: 0 8px; }
+                    ^
+784:   .profile-meta { flex: 1; min-width: 0; font-size: 0.7rem; }
+785:   .meta-row { display: flex; gap: 6px; }
+PM 7:56:41 [vite-plugin-svelte] src/components/MaterialPresetSelector.svelte:95:4 Visible, non-interactive elements with a click event must be accompanied by a keyboard event handler. Consider whether an interactive element such as `<button type="button">` or `<a>` might be more appropriate
+https://svelte.dev/e/a11y_click_events_have_key_events
+93:   <div class="preset-overlay" onclick={onclose} onkeydown={handleKeydown}>
+94:     <!-- svelte-ignore a11y_no_static_element_interactions -->
+95:     <div class="preset-modal" onclick={(e) => e.stopPropagation()}>
+              ^
+96:       <div class="preset-header">
+97:         <h3>{t('dialog.chooseMaterial')}</h3>
+[plugin vite:resolve] Module "fs" has been externalized for browser compatibility, imported by "D:/Documents/coding/Calcsta/web/src/lib/engine/wasm-solver.ts". See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.
+[plugin vite:resolve] Module "url" has been externalized for browser compatibility, imported by "D:/Documents/coding/Calcsta/web/src/lib/engine/wasm-solver.ts". See https://vite.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.
+✓ 506 modules transformed.
+rendering chunks...
+[plugin vite:reporter] 
+(!) D:/Documents/coding/Calcsta/web/src/lib/engine/wasm-solver.ts is dynamically imported by D:/Documents/coding/Calcsta/web/src/App.svelte but also statically imported by D:/Documents/coding/Calcsta/web/src/components/WhatIfPanel.svelte, D:/Documents/coding/Calcsta/web/src/components/toolbar/ToolbarAdvanced.svelte, D:/Documents/coding/Calcsta/web/src/lib/engine/diagrams.ts, D:/Documents/coding/Calcsta/web/src/lib/engine/influence-service.ts, D:/Documents/coding/Calcsta/web/src/lib/engine/kinematic-2d.ts, D:/Documents/coding/Calcsta/web/src/lib/engine/moving-loads.ts, D:/Documents/coding/Calcsta/web/src/lib/engine/section-stress-3d.ts, D:/Documents/coding/Calcsta/web/src/lib/engine/section-stress.ts, D:/Documents/coding/Calcsta/web/src/lib/engine/solver-pool.ts, D:/Documents/coding/Calcsta/web/src/lib/engine/solver-service.ts, D:/Documents/coding/Calcsta/web/src/lib/section/canonical.ts, D:/Documents/coding/Calcsta/web/src/lib/section/migration.ts, D:/Documents/coding/Calcsta/web/src/lib/section/panel.ts, D:/Documents/coding/Calcsta/web/src/lib/section/shear-crosscheck.ts, D:/Documents/coding/Calcsta/web/src/lib/section/state.ts, D:/Documents/coding/Calcsta/web/src/lib/section/stress-state.ts, D:/Documents/coding/Calcsta/web/src/lib/utils/e2e-hooks.ts, dynamic import will not move module into another chunk.
+
+computing gzip size...
+dist/assets/solver-worker-DHJYwDbD.js                     0.96 kB
+dist/index.html                                           1.32 kB │ gzip:   0.69 kB
+dist/assets/KaTeX_Size3-Regular-CTq5MqoE.woff             4.42 kB
+dist/assets/KaTeX_Size4-Regular-Dl5lxZxV.woff2            4.93 kB
+dist/assets/KaTeX_Size2-Regular-Dy4dx90m.woff2            5.21 kB
+dist/assets/KaTeX_Size1-Regular-mCD8mA8B.woff2            5.47 kB
+dist/assets/KaTeX_Size4-Regular-BF-4gkZK.woff             5.98 kB
+dist/assets/KaTeX_Size2-Regular-oD1tc_U0.woff             6.19 kB
+dist/assets/KaTeX_Size1-Regular-C195tn64.woff             6.50 kB
+dist/assets/KaTeX_Caligraphic-Regular-Di6jR-x-.woff2      6.91 kB
+dist/assets/KaTeX_Caligraphic-Bold-Dq_IR9rO.woff2         6.91 kB
+dist/assets/KaTeX_Size3-Regular-DgpXs0kz.ttf              7.59 kB
+dist/assets/KaTeX_Caligraphic-Regular-CTRA-rTL.woff       7.66 kB
+dist/assets/KaTeX_Caligraphic-Bold-BEiXGLvX.woff          7.72 kB
+dist/assets/KaTeX_Script-Regular-D3wIWfF6.woff2           9.64 kB
+dist/assets/KaTeX_SansSerif-Regular-DDBCnlJ7.woff2       10.34 kB
+dist/assets/KaTeX_Size4-Regular-DWFBv043.ttf             10.36 kB
+dist/assets/KaTeX_Script-Regular-D5yQViql.woff           10.59 kB
+dist/assets/KaTeX_Fraktur-Regular-CTYiF6lA.woff2         11.32 kB
+dist/assets/KaTeX_Fraktur-Bold-CL6g_b3V.woff2            11.35 kB
+dist/assets/KaTeX_Size2-Regular-B7gKUWhC.ttf             11.51 kB
+dist/assets/KaTeX_SansSerif-Italic-C3H0VqGB.woff2        12.03 kB
+dist/assets/KaTeX_SansSerif-Bold-D1sUS0GD.woff2          12.22 kB
+dist/assets/KaTeX_Size1-Regular-Dbsnue_I.ttf             12.23 kB
+dist/assets/KaTeX_SansSerif-Regular-CS6fqUqJ.woff        12.32 kB
+dist/assets/KaTeX_Caligraphic-Regular-wX97UBjC.ttf       12.34 kB
+dist/assets/KaTeX_Caligraphic-Bold-ATXxdsX0.ttf          12.37 kB
+dist/assets/KaTeX_Fraktur-Regular-Dxdc4cR9.woff          13.21 kB
+dist/assets/KaTeX_Fraktur-Bold-BsDP51OF.woff             13.30 kB
+dist/assets/KaTeX_Typewriter-Regular-CO6r4hn1.woff2      13.57 kB
+dist/assets/KaTeX_SansSerif-Italic-DN2j7dab.woff         14.11 kB
+dist/assets/KaTeX_SansSerif-Bold-DbIhKOiC.woff           14.41 kB
+dist/assets/KaTeX_Typewriter-Regular-C0xS9mPB.woff       16.03 kB
+dist/assets/KaTeX_Math-BoldItalic-CZnvNsCZ.woff2         16.40 kB
+dist/assets/KaTeX_Math-Italic-t53AETM-.woff2             16.44 kB
+dist/assets/KaTeX_Script-Regular-C5JkGWo-.ttf            16.65 kB
+dist/assets/KaTeX_Main-BoldItalic-DxDJ3AOS.woff2         16.78 kB
+dist/assets/KaTeX_Main-Italic-NWA7e6Wa.woff2             16.99 kB
+dist/assets/KaTeX_Math-BoldItalic-iY-2wyZ7.woff          18.67 kB
+dist/assets/KaTeX_Math-Italic-DA0__PXp.woff              18.75 kB
+dist/assets/KaTeX_Main-BoldItalic-SpSLRI95.woff          19.41 kB
+dist/assets/KaTeX_SansSerif-Regular-BNo7hRIc.ttf         19.44 kB
+dist/assets/KaTeX_Fraktur-Regular-CB_wures.ttf           19.57 kB
+dist/assets/KaTeX_Fraktur-Bold-BdnERNNW.ttf              19.58 kB
+dist/assets/KaTeX_Main-Italic-BMLOBm91.woff              19.68 kB
+dist/assets/KaTeX_SansSerif-Italic-YYjJ1zSn.ttf          22.36 kB
+dist/assets/KaTeX_SansSerif-Bold-CFMepnvq.ttf            24.50 kB
+dist/assets/KaTeX_Main-Bold-Cx986IdX.woff2               25.32 kB
+dist/assets/KaTeX_Main-Regular-B22Nviop.woff2            26.27 kB
+dist/assets/KaTeX_Typewriter-Regular-D3Ib7_Hf.ttf        27.56 kB
+dist/assets/KaTeX_AMS-Regular-BQhdFMY1.woff2             28.08 kB
+dist/assets/KaTeX_Main-Bold-Jm3AIy58.woff                29.91 kB
+dist/assets/KaTeX_Main-Regular-Dr94JaBh.woff             30.77 kB
+dist/assets/KaTeX_Math-BoldItalic-B3XSjfu4.ttf           31.20 kB
+dist/assets/KaTeX_Math-Italic-flOr_0UB.ttf               31.31 kB
+dist/assets/KaTeX_Main-BoldItalic-DzxPMmG6.ttf           32.97 kB
+dist/assets/KaTeX_AMS-Regular-DMm9YOAa.woff              33.52 kB
+dist/assets/KaTeX_Main-Italic-3WenGoN9.ttf               33.58 kB
+dist/assets/KaTeX_Main-Bold-waoOVXN0.ttf                 51.34 kB
+dist/assets/KaTeX_Main-Regular-ypZvNtVU.ttf              53.58 kB
+dist/assets/KaTeX_AMS-Regular-DRggAlZN.ttf               63.63 kB
+dist/assets/index-DDSOldrH.css                          189.82 kB │ gzip:  31.76 kB
+dist/assets/_wasm-stub-DRUGVKaI.js                        0.07 kB │ gzip:   0.08 kB
+dist/assets/cantilever-point-DBIW1CtK.js                  0.86 kB │ gzip:   0.49 kB
+dist/assets/cantilever-DSQCOPSw.js                        0.87 kB │ gzip:   0.49 kB
+dist/assets/simply-supported-BBBkZwEu.js                  0.88 kB │ gzip:   0.49 kB
+dist/assets/settlement-DnnHdsst.js                        0.97 kB │ gzip:   0.49 kB
+dist/assets/point-loads-DB6nqjlQ.js                       0.99 kB │ gzip:   0.52 kB
+dist/assets/bridge-highway-FeTnk5sy.js                    1.01 kB │ gzip:   0.57 kB
+dist/assets/hidden-mechanism-C1hqAP-I.js                  1.08 kB │ gzip:   0.52 kB
+dist/assets/spring-support-B4rsoF1E.js                    1.09 kB │ gzip:   0.54 kB
+dist/assets/continuous-beam-C6i9Ajnp.js                   1.27 kB │ gzip:   0.56 kB
+dist/assets/bridge-moving-load-DfCQDODT.js                1.28 kB │ gzip:   0.56 kB
+dist/assets/thermal-BR8lamBe.js                           1.29 kB │ gzip:   0.61 kB
+dist/assets/portal-frame-Bo4UwQPb.js                      1.33 kB │ gzip:   0.62 kB
+dist/assets/frame-cirsoc-dl-Ch-yDytv.js                   1.48 kB │ gzip:   0.66 kB
+dist/assets/gerber-beam-CGxDVIG4.js                       1.62 kB │ gzip:   0.61 kB
+dist/assets/multi-section-frame-CNcakPTQ.js               1.62 kB │ gzip:   0.63 kB
+dist/assets/two-story-frame-cq8V8B9v.js                   1.75 kB │ gzip:   0.68 kB
+dist/assets/three-hinge-arch-BZ-UGC-m.js                  1.96 kB │ gzip:   0.65 kB
+dist/assets/frame-seismic-BSSUeVlV.js                     2.16 kB │ gzip:   0.78 kB
+dist/assets/truss-DVArpBqW.js                             2.21 kB │ gzip:   0.66 kB
+dist/assets/warren-truss-A0d507bM.js                      2.47 kB │ gzip:   0.70 kB
+dist/assets/howe-truss-CDQiTKxQ.js                        2.60 kB │ gzip:   0.71 kB
+dist/assets/building-3story-dlw-Cw3f8OJy.js               2.71 kB │ gzip:   0.85 kB
+dist/assets/color-map-demo-ASJSACIt.js                    2.89 kB │ gzip:   0.84 kB
+dist/assets/xlsx-DGuHH-KN.js                            429.49 kB │ gzip: 143.07 kB
+dist/assets/index-BY--FUbs.js                         2,403.19 kB │ gzip: 724.93 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 12.84s
