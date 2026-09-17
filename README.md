@@ -16,8 +16,6 @@
 - CAD 스타일로 빠르게 스케치하고 변형할 수 있도록 함.
 - 상세한 해석 및 경계조건 기능들 제거.
 
----
-
 ## 시작하기
 
 **바로 사용하기:** 최신 브라우저에서 [calcsta.pages.dev](https://calcsta.pages.dev)을 여세요.
@@ -31,8 +29,6 @@ npm install
 npm run dev       # http://localhost:4000
 ```
 
----
-
 ## 라이선스
 
 Calcsta는 Stabileo를 수정하여 2026년 9월부터 개발한 비공식 파생 프로젝트입니다.
@@ -40,5 +36,3 @@ Calcsta는 Stabileo를 수정하여 2026년 9월부터 개발한 비공식 파�
 Calcsta는 Stabileo 의 라이선스에 따라 [AGPL-3.0](LICENSE) 으로 배포됩니다.
 
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)
-
----
