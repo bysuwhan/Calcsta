@@ -243,7 +243,7 @@ function createTabManager() {
           name: modelStore.model.name || t('tabBar.newStructure'),
           modelSnapshot: modelStore.snapshot(),
           diagramType: 'none',
-          deformedScale: 100,
+          deformedScale: 1,
           diagramScale: 1,
           showDiagramValues: true,
           hadResults: false,

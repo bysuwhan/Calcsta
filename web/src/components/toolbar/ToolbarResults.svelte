@@ -156,10 +156,10 @@
       {#if resultsStore.diagramType === 'deformed'}
         <div class="input-group">
           <label>{t('results.diagramScale')}:</label>
-          <button class="scale-step-btn" onclick={() => resultsStore.deformedScale = Math.max(1, resultsStore.deformedScale - (resultsStore.deformedScale <= 10 ? 1 : resultsStore.deformedScale <= 100 ? 5 : 50))} title={t('results.decreaseScale')}>◀</button>
-          <input type="range" min="1" max="1000" step="1" bind:value={resultsStore.deformedScale} style="width: 80px" />
-          <button class="scale-step-btn" onclick={() => resultsStore.deformedScale = Math.min(1000, resultsStore.deformedScale + (resultsStore.deformedScale < 10 ? 1 : resultsStore.deformedScale < 100 ? 5 : 50))} title={t('results.increaseScale')}>▶</button>
-          <span style="font-size: 0.7rem; color: #888">{Math.round(resultsStore.deformedScale)}×</span>
+          <button class="scale-step-btn" onclick={() => resultsStore.deformedScale = resultsStore.deformedScale <= 1 ? (resultsStore.deformedScale > 0.5 ? 0.5 : 0.25) : Math.max(1, resultsStore.deformedScale - (resultsStore.deformedScale <= 10 ? 1 : resultsStore.deformedScale <= 100 ? 5 : 50))} title={t('results.decreaseScale')}>◀</button>
+          <input type="range" min="0.25" max="1000" step="0.25" bind:value={resultsStore.deformedScale} style="width: 80px" />
+          <button class="scale-step-btn" onclick={() => resultsStore.deformedScale = resultsStore.deformedScale < 1 ? (resultsStore.deformedScale < 0.5 ? 0.5 : 1) : Math.min(1000, resultsStore.deformedScale + (resultsStore.deformedScale < 10 ? 1 : resultsStore.deformedScale < 100 ? 5 : 50))} title={t('results.increaseScale')}>▶</button>
+          <span style="font-size: 0.7rem; color: #888">{resultsStore.deformedScale}×</span>
         </div>
       {:else if resultsStore.diagramType !== 'none' && resultsStore.diagramType !== 'colorMap' && resultsStore.diagramType !== 'axialColor'}
         <div class="input-group">
