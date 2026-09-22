@@ -4,6 +4,21 @@ import { solve } from '../wasm-solver';
 
 beforeEach(() => model.clear());
 
+it('preserves a support on the higher-numbered side of a block pin', () => {
+  const a = model.addNode(0, 0), b = model.addNode(2, 0);
+  const c = model.addNode(2, 0), d = model.addNode(4, 0);
+  const left = model.addElement(a, b), right = model.addElement(c, d);
+  const block = model.createBlock([left], [], { x: 0, y: 0 }, 'left');
+  model.createBlock([right], [], { x: 2, y: 0 }, 'right');
+  model.addSupport(a, 'fixed'); model.addSupport(c, 'pinned'); model.addSupport(d, 'fixed');
+  model.placeBlock(block, { x: 0, y: 0, angle: 0 }, { source: b, target: c });
+  model.addNodalLoad(b, 0, -10);
+  const result = model.solve();
+  if (!result || typeof result === 'string') throw new Error(String(result));
+  expect(result.displacements.find(n => n.nodeId === b)!.uz).toBeCloseTo(0, 12);
+  expect(result.reactions.find(r => r.nodeId === c)!.rz).toBeCloseTo(10, 6);
+});
+
 it('grouping a continuous beam preserves displacement and reactions', () => {
   const a = model.addNode(0, 0), b = model.addNode(2, 0), c = model.addNode(4, 0);
   const left = model.addElement(a, b); model.addElement(b, c);
@@ -44,4 +59,38 @@ it('a hidden loaded part contributes neither stiffness nor load', () => {
   const input = model.buildSolverInput()!, result = solve(input);
   expect(input.elements.size).toBe(1); expect(input.loads).toHaveLength(1);
   expect(result.displacements.find(n => n.nodeId === b)!.uz).toBeCloseTo(baseline.displacements.find(n => n.nodeId === b)!.uz, 10);
+});
+
+function cylinderAttachment(offset = 0) {
+  const a = model.addNode(0, 0), b = model.addNode(2, 0);
+  const left = model.addElement(a, b);
+  model.createBlock([left], [], { x: 0, y: 0 }, '왼쪽');
+  model.addSupport(a, 'fixed');
+  const duplicate = model.addNode(2, offset);
+  model.addCylinderLoad(a, duplicate, 10);
+  return { a, b, duplicate };
+}
+
+it('resolves an orphan cylinder attachment coincident with a block endpoint', () => {
+  const { b, duplicate } = cylinderAttachment();
+  const snapshot = model.snapshot();
+  const result = model.solve();
+  if (!result || typeof result === 'string') throw new Error(String(result));
+  expect(result.displacements.find(r => r.nodeId === b)!.ux).toBeGreaterThan(0);
+  expect(model.buildSolverInput()!.nodes.has(duplicate)).toBe(false);
+  expect(model.snapshot()).toEqual(snapshot);
+});
+
+it('still rejects a cylinder endpoint away from the block', () => {
+  cylinderAttachment(0.01);
+  expect(typeof model.solve()).toBe('string');
+});
+
+it('does not merge an attachment when two block endpoints coincide', () => {
+  const { duplicate } = cylinderAttachment();
+  const c = model.addNode(2, 0), d = model.addNode(4, 0);
+  const right = model.addElement(c, d);
+  model.createBlock([right], [], { x: 2, y: 0 }, '오른쪽');
+  expect(model.buildSolverInput()!.nodes.has(duplicate)).toBe(true);
+  expect(typeof model.solve()).toBe('string');
 });

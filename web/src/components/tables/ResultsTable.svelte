@@ -91,7 +91,7 @@
 {/if}
 <div class="results-sub-tabs">
   <button class:active={resultsSubTab === 'displacements'} onclick={() => resultsSubTab = 'displacements'}>{t('resultsTable.displacements')}</button>
-  <button class:active={resultsSubTab === 'reactions'} onclick={() => resultsSubTab = 'reactions'}>{t('resultsTable.reactions')}</button>
+  <button class:active={resultsSubTab === 'reactions'} onclick={() => { resultsSubTab = 'reactions'; resultsStore.showReactions = true; }}>{t('resultsTable.reactions')}</button>
   <button class:active={resultsSubTab === 'forces'} onclick={() => resultsSubTab = 'forces'}>{t('resultsTable.internalForces')}</button>
   {#if allDiagnostics.length > 0}
     <button class:active={resultsSubTab === 'diagnostics'} onclick={() => resultsSubTab = 'diagnostics'}>

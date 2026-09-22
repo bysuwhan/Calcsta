@@ -145,7 +145,7 @@ function createResultsStore() {
   let modalResult3D = $state<ModalResult3D | null>(null);
   let bucklingResult3D = $state<BucklingResult3D | null>(null);
   let spectralResult3D = $state<SpectralResult3D | null>(null);
-  let showReactions = $state<boolean>(false);
+  let showReactions = $state<boolean>(true);
   let showConstraintForces = $state<boolean>(false);
   let movingLoadShowEnvelope = $state<boolean>(false);
 
@@ -696,7 +696,7 @@ function createResultsStore() {
       // otherwise a running analysis can resurrect pre-edit forces after clear().
       movingLoadAbortController?.abort();
       movingLoadAbortController = null;
-      showReactions = false;
+      // Preserve the reaction visibility preference across recalculation.
       showConstraintForces = false;
       // NOTE: stressQuery is NOT cleared here — it represents user intent ("what to inspect").
       // When results disappear, Viewport effects cascade: no results → selectMode='elements' → stressQuery=null.
@@ -725,7 +725,7 @@ function createResultsStore() {
       _onResultsPublish?.();
       results3D = r;
       singleResults3D = r;
-      showReactions = false;
+      // Preserve the reaction visibility preference across recalculation.
       showConstraintForces = false;
       deformedScale = 1; // reset to default on fresh solve
       // Preserve current diagram type during live-calc re-solves
@@ -769,7 +769,7 @@ function createResultsStore() {
       modalResult3D = null;
       bucklingResult3D = null;
       spectralResult3D = null;
-      showReactions = false;
+      // Preserve the reaction visibility preference across recalculation.
       showConstraintForces = false;
       // Reset diagram state so stale deformed/diagrams are removed from scene
       diagramType = 'none';
@@ -795,7 +795,7 @@ function createResultsStore() {
       perCase3D = pc;
       perCombo3D = pco;
       envelope3D = env;
-      showReactions = false;
+      // Preserve the reaction visibility preference across recalculation.
       showConstraintForces = false;
       activeCaseId = null;
       activeComboId = pco.keys().next().value ?? null;

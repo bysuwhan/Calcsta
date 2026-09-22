@@ -824,75 +824,64 @@ export function drawReactions(
   reactions: ReactionData[],
   getNodeScreen: (nodeId: number) => ScreenPoint | null,
   unitSystem: UnitSystem = 'SI',
+  labels?: LabelCollector,
 ): void {
+  ctx.save();
   for (const r of reactions) {
     const s = getNodeScreen(r.nodeId);
     if (!s) continue;
 
-    const arrowLen = 35;
+    const arrowLen = 60;
     const headSize = 7;
 
     const vertical = get2DDisplayReactionVertical(r);
     const moment = get2DDisplayMoment(r);
 
-    // Draw displayed vertical reaction — arrow shows force FROM support ON structure
-    if (Math.abs(vertical) > 0.001) {
-      const dir = vertical > 0 ? 1 : -1;
-      const x = s.x;
-      const y1 = s.y + dir * arrowLen;
-      const y2 = s.y;
-
+    // Resultant force acts from the support onto the structure. Canvas Y is
+    // downward. Report the smaller angle to the X axis; the arrow gives direction.
+    const magnitude = Math.hypot(r.rx, vertical);
+    if (Number.isFinite(magnitude) && magnitude > 0.001) {
+      const dx = r.rx / magnitude, dy = -vertical / magnitude;
+      const tail = { x: s.x - dx * arrowLen, y: s.y - dy * arrowLen };
+      const angle = Math.atan2(Math.abs(vertical), Math.abs(r.rx)) * 180 / Math.PI;
+      const angleText = angle.toFixed(1);
       ctx.strokeStyle = '#00e676';
+      ctx.fillStyle = '#00e676';
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(x, y1);
-      ctx.lineTo(x, y2);
+      ctx.moveTo(tail.x, tail.y);
+      ctx.lineTo(s.x, s.y);
       ctx.stroke();
-
-      // Arrowhead pointing toward the node
-      ctx.fillStyle = '#00e676';
       ctx.beginPath();
-      ctx.moveTo(x, y2);
-      ctx.lineTo(x - headSize * 0.5, y2 + dir * headSize);
-      ctx.lineTo(x + headSize * 0.5, y2 + dir * headSize);
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x - dx * headSize - dy * headSize * 0.5, s.y - dy * headSize + dx * headSize * 0.5);
+      ctx.lineTo(s.x - dx * headSize + dy * headSize * 0.5, s.y - dy * headSize - dx * headSize * 0.5);
       ctx.closePath();
       ctx.fill();
-
-      // Label — absolute value + unit (direction given by arrow)
-      ctx.font = 'bold 10px sans-serif';
-      ctx.fillStyle = '#00e676';
-      ctx.textAlign = 'center';
-      ctx.fillText(`${TWO_D_REACTION_LABELS.vertical}=${Math.abs(toDisplay(vertical, 'force', unitSystem)).toFixed(2)} ${unitLabel('force', unitSystem)}`, x, y1 + dir * 12);
+      const text = `R=${toDisplay(magnitude, 'force', unitSystem).toFixed(2)} ${unitLabel('force', unitSystem)}  θ=${angleText}° (X)`;
+      let x = tail.x - dx * 12;
+      const y = tail.y - dy * 12;
+      const anchorX = dx > 0.2 ? 'right' : dx < -0.2 ? 'left' : 'center';
+      ctx.font = '12px sans-serif';
+      const viewportWidth = ctx.canvas?.clientWidth;
+      let atEdge = false;
+      if (viewportWidth) {
+        const width = ctx.measureText(text).width;
+        const left = anchorX === 'right' ? width : anchorX === 'center' ? width / 2 : 0;
+        const bounded = Math.max(left + 8, Math.min(viewportWidth - (width - left) - 8, x));
+        atEdge = bounded !== x;
+        x = bounded;
+      }
+      if (labels) {
+        labels.block({ x1: tail.x, y1: tail.y, x2: s.x, y2: s.y });
+        labels.add({ text, colour: '#00e676', font: '12px sans-serif',
+          box: { x, y, width: 220, height: 14, dirX: atEdge ? 0 : -dx, dirY: atEdge ? (dy > 0 ? -1 : 1) : -dy, anchorX, priority: magnitude } });
+      } else {
+        ctx.font = '12px sans-serif';
+        ctx.textAlign = anchorX;
+        ctx.fillText(text, x, y);
+      }
     }
-
-    // Draw Rx (horizontal reaction) — arrow shows force FROM support ON structure
-    if (Math.abs(r.rx) > 0.001) {
-      const dir = r.rx > 0 ? 1 : -1; // positive Rx = rightward arrow (support pushes right)
-      const y = s.y;
-      const x1 = s.x - dir * arrowLen;
-      const x2 = s.x;
-
-      ctx.strokeStyle = '#00e676';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(x1, y);
-      ctx.lineTo(x2, y);
-      ctx.stroke();
-
-      ctx.fillStyle = '#00e676';
-      ctx.beginPath();
-      ctx.moveTo(x2, y);
-      ctx.lineTo(x2 - dir * headSize, y - headSize * 0.5);
-      ctx.lineTo(x2 - dir * headSize, y + headSize * 0.5);
-      ctx.closePath();
-      ctx.fill();
-
-      ctx.font = 'bold 10px sans-serif';
-      ctx.fillStyle = '#00e676';
-      ctx.textAlign = 'center';
-      ctx.fillText(`${TWO_D_REACTION_LABELS.horizontal}=${Math.abs(toDisplay(r.rx, 'force', unitSystem)).toFixed(2)} ${unitLabel('force', unitSystem)}`, x1 - dir * 5, y - 8);
-    }
-
     // Draw displayed moment reaction as arc arrow — shows moment FROM support ON structure
     if (Math.abs(moment) > 0.001) {
       const radius = 18;
@@ -921,7 +910,7 @@ export function drawReactions(
       ctx.fillText(`${TWO_D_REACTION_LABELS.moment}=${Math.abs(toDisplay(moment, 'moment', unitSystem)).toFixed(2)} ${unitLabel('moment', unitSystem)}`, s.x, s.y - radius - 5);
     }
   }
-  ctx.textAlign = 'left'; // reset
+  ctx.restore();
 }
 
 // ── Constraint Forces (2D) ────────────────────────────────────────────

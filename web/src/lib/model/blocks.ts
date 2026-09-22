@@ -231,8 +231,52 @@ export function activeBlockModel(model: StructureModel): StructureModel {
   const nodes = new Map([...model.nodes].filter(([id]) => !hiddenNodes.has(id)));
   const elements = new Map([...model.elements].filter(([id, e]) => !hiddenElements.has(id) && nodes.has(e.nodeI) && nodes.has(e.nodeJ)));
   const constraints = model.constraints.filter(c => constraintNodes(c).every(id => nodes.has(id)));
+  // Legacy cylinder placement could leave a separate base node exactly on a
+  // block endpoint. Resolve only unambiguous, otherwise unused attachment nodes;
+  // never merge structural nodes (coincident block nodes can be intentional pins).
+  const connected = new Set([...elements.values()].flatMap(e => [e.nodeI, e.nodeJ]));
+  const occupied = new Set([
+    ...connected,
+    ...model.constraints.flatMap(constraintNodes),
+    ...[...model.connectors.values()].flatMap(c => [c.nodeI, c.nodeJ]),
+    ...[...model.plates.values(), ...model.quads.values()].flatMap(e => e.nodes),
+    ...[...model.supports.values()].map(s => s.nodeId),
+    ...blocks.joints.flatMap(j => [resolveNodeRef(blocks, j.a), resolveNodeRef(blocks, j.b)]),
+    ...model.loads.flatMap(l => 'nodeId' in l.data ? [l.data.nodeId] : []),
+  ]);
+  const aliases = new Map<number, number>();
+  for (const load of model.loads) {
+    if (load.type !== 'cylinder') continue;
+    for (const id of [load.data.nodeI, load.data.nodeJ]) {
+      const node = nodes.get(id);
+      if (!node || occupied.has(id) || blockForNode(blocks, id)) continue;
+      const candidates = [...nodes.values()].filter(n => connected.has(n.id)
+        && blockForNode(blocks, n.id)
+        && Math.hypot(n.x - node.x, n.y - node.y, (n.z ?? 0) - (node.z ?? 0)) < 1e-7);
+      if (candidates.length === 1) aliases.set(id, candidates[0].id);
+    }
+  }
+  for (const id of aliases.keys()) nodes.delete(id);
+  const loads = model.loads.map(l => l.type === 'cylinder' ? {
+    ...l, data: { ...l.data, nodeI: aliases.get(l.data.nodeI) ?? l.data.nodeI, nodeJ: aliases.get(l.data.nodeJ) ?? l.data.nodeJ },
+  } : l);
   // A separate spanning forest per DOF avoids cyclic/repeated equalities in multi-part joints.
   const parents = new Map<number, Map<number, number>>();
+  // The constraint solver eliminates slave DOFs. Keep supported DOFs on the
+  // master side so their prescribed displacement remains in the reduced system.
+  const supportsByNode = new Map([...model.supports.values()].map(s => [s.nodeId, s]));
+  function supportPriority(id: number, dof: number): number {
+    const s = supportsByNode.get(id);
+    if (!s || s.type === 'spring') return 0;
+    if (s.type === 'fixed') return 2;
+    if (s.type === 'pinned') return dof === 4 ? 0 : 2;
+    if (dof === 4) return 0;
+    // Inclined/local rollers mix translations; retain their node as master.
+    if (s.angle || s.isGlobal === false) return 1;
+    if (s.type === 'rollerX') return dof === 2 ? 2 : 0;
+    if (s.type === 'rollerY' || s.type === 'rollerZ') return dof === 0 ? 2 : 0;
+    return 0;
+  }
   function root(map: Map<number, number>, id: number): number {
     const p = map.get(id); if (p === undefined || p === id) return id;
     const r = root(map, p); map.set(id, r); return r;
@@ -244,7 +288,9 @@ export function activeBlockModel(model: StructureModel): StructureModel {
       const map = parents.get(dof) ?? new Map<number, number>(); parents.set(dof, map);
       const ar = root(map, a), br = root(map, b);
       if (ar === br) return false;
-      map.set(Math.max(ar, br), Math.min(ar, br)); return true;
+      const ap = supportPriority(ar, dof), bp = supportPriority(br, dof);
+      const master = ap === bp ? Math.min(ar, br) : ap > bp ? ar : br;
+      map.set(master === ar ? br : ar, master); return true;
     });
 
   }
@@ -260,7 +306,7 @@ export function activeBlockModel(model: StructureModel): StructureModel {
   for (const tie of ties.values()) constraints.push({ type: 'equalDOF', ...tie });
   return { ...model, nodes, elements, constraints,
     supports: new Map([...model.supports].filter(([, s]) => nodes.has(s.nodeId))),
-    loads: model.loads.filter(l => 'nodeId' in l.data ? nodes.has(l.data.nodeId) : 'elementId' in l.data ? elements.has(l.data.elementId) : true),
+    loads: loads.filter(l => l.type === 'cylinder' ? nodes.has(l.data.nodeI) && nodes.has(l.data.nodeJ) : 'nodeId' in l.data ? nodes.has(l.data.nodeId) : 'elementId' in l.data ? elements.has(l.data.elementId) : true),
     connectors: new Map([...model.connectors].filter(([, c]) => nodes.has(c.nodeI) && nodes.has(c.nodeJ))),
   };
 }

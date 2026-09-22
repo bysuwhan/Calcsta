@@ -1293,7 +1293,7 @@
 
       // Draw reactions when results exist and toggle is on. In despiece the
       // free-body overlay already draws each reaction ONCE — don't double them.
-      if (resultsStore.showReactions && resultsStore.diagramType !== 'despiece') drawReactions();
+      if (resultsStore.showReactions && resultsStore.diagramType !== 'despiece') drawReactions(currentFrameLabels);
       if (resultsStore.showConstraintForces) drawConstraintForces();
 
       // Overlay label
@@ -1876,14 +1876,14 @@
     _drawNodalLoad(ctx!, screen, load.data, caseColor, caseName, labels, uiStore.unitSystem);
   }
 
-  function drawReactions() {
+  function drawReactions(labels: LabelCollector) {
     if (!resultsStore.results) return;
     _drawReactions(ctx!, resultsStore.results.reactions as ReactionData[], (nodeId) => {
       const node = modelStore.getNode(nodeId);
       if (!node) return null;
       const pn = project2DNode(node);
       return uiStore.worldToScreen(pn.x, pn.y);
-    }, uiStore.unitSystem);
+    }, uiStore.unitSystem, labels);
   }
 
   function drawConstraintForces() {
