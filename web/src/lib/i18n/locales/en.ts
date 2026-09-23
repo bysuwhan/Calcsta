@@ -3144,7 +3144,7 @@ const en: Record<string, string> = {
   'table.frame': 'Frame',
   'table.truss': 'Truss',
   'config.unitSI': 'SI (kN, m)',
-  'config.unitSIMm': 'SI (kg, mm)',
+  'config.unitSIMm': 'SI (kgf, mm)',
   'config.unitImperial': 'Imperial (kip, ft)',
   'matEdit.optional': 'optional',
   'dsm.expectedValue': 'Expected value',

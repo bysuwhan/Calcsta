@@ -95,6 +95,7 @@
   let blockDragStartScreen: { x: number; y: number } | null = null;
   let blockDragStart: { pointer: { x: number; y: number }; pose: { x: number; y: number; angle: number } } | null = null;
   let blockDragPose: { x: number; y: number; angle: number } | null = null;
+  let blockDragGripTarget: { x: number; y: number } | null = null;
   let blockDragSourceNodeId: number | null = null;
   let blockDragTargetNodeId: number | null = null;
 
@@ -920,9 +921,9 @@
     for (const joint of modelStore.blocks.joints) {
       const ai = resolveNodeRef(modelStore.blocks, joint.a), bi = resolveNodeRef(modelStore.blocks, joint.b);
       const n = ai === undefined ? undefined : modelStore.getNode(ai);
-      if (!n || bi === undefined || !modelStore.nodes.has(bi) || modelStore.blockPreview) continue;
+      if (!n || bi === undefined || !modelStore.nodes.has(bi)) continue;
       const p = uiStore.worldToScreen(n.x, n.y);
-      ctx.save(); ctx.strokeStyle = '#f8bd63'; ctx.lineWidth = 2;
+      ctx.save(); ctx.strokeStyle = joint.locked ? '#54d66a' : '#f8bd63'; ctx.lineWidth = joint.locked ? 3 : 2;
       ctx.globalAlpha = modelStore.editingBlockId === null ? 1 : 0.2;
       ctx.beginPath(); ctx.arc(p.x, p.y, 9, 0, Math.PI * 2); ctx.stroke(); ctx.restore();
     }
@@ -1958,6 +1959,7 @@
         blockDragPose = { x: nodeBlock.x, y: nodeBlock.y, angle: nodeBlock.angle };
         blockDragSourceNodeId = nearNode.id;
         blockDragTargetNodeId = null;
+        blockDragGripTarget = null;
         return;
       }
       const id = blockUI.instanceAt(world);
@@ -1973,6 +1975,7 @@
           blockDragPose = { x: block.x, y: block.y, angle: block.angle };
           blockDragSourceNodeId = null;
           blockDragTargetNodeId = null;
+          blockDragGripTarget = null;
         }
         return;
       }
@@ -2579,6 +2582,7 @@
         : findNearestNodeAtScreenExcludingBlock(mx, my, draggedBlockId);
       const target = targetNode ?? snapped;
       blockDragTargetNodeId = targetNode?.id ?? null;
+      blockDragGripTarget = { x: target.x, y: target.y };
       const dx = target.x - blockDragStart.pointer.x;
       const dy = target.y - blockDragStart.pointer.y;
       blockDragPose = {
@@ -2586,7 +2590,8 @@
         y: blockDragStart.pose.y + dy,
         angle: blockDragStart.pose.angle,
       };
-      modelStore.previewBlock(draggedBlockId, blockDragPose);
+      modelStore.previewBlock(draggedBlockId, blockDragPose,
+        { source: blockDragStart.pointer, target: blockDragGripTarget });
       invalidate();
       return;
     }
@@ -2761,7 +2766,9 @@
         const pin = blockDragSourceNodeId !== null && blockDragTargetNodeId !== null
           ? { source: blockDragSourceNodeId, target: blockDragTargetNodeId }
           : undefined;
-        modelStore.placeBlock(draggedBlockId, blockDragPose, pin);
+        modelStore.placeBlock(draggedBlockId, blockDragPose, pin,
+          blockDragStart && blockDragGripTarget
+            ? { source: blockDragStart.pointer, target: blockDragGripTarget } : undefined);
         resultsStore.clear();
       } else {
         modelStore.previewBlock(draggedBlockId, null);
@@ -2773,6 +2780,7 @@
       blockDragPose = null;
       blockDragSourceNodeId = null;
       blockDragTargetNodeId = null;
+      blockDragGripTarget = null;
     }
 
     if (draggedDimensionId !== null) {
@@ -3081,6 +3089,7 @@
       blockDragPose = null;
       blockDragSourceNodeId = null;
       blockDragTargetNodeId = null;
+      blockDragGripTarget = null;
       boxSelect = null;
     }
   }

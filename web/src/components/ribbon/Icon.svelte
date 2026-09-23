@@ -57,6 +57,14 @@
     <path d="M2.8 12s3.3-5.5 9.2-5.5 9.2 5.5 9.2 5.5-3.3 5.5-9.2 5.5S2.8 12 2.8 12z" />
     <circle cx="12" cy="12" r="2.6" />
     {#if name === 'visibility-off'}<path d="M4 4l16 16" />{/if}
+  {:else if name === 'lock' || name === 'lock-open'}
+    <rect x="5" y="10" width="14" height="11" rx="2" />
+    {#if name === 'lock'}
+      <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+    {:else}
+      <path d="M8 10V7a4 4 0 0 1 7.5-2" />
+    {/if}
+    <circle cx="12" cy="15.5" r="1" />
   {:else if name === 'view2d'}
     <!-- A framed plane with its grid. -->
     <rect x="3.5" y="4.5" width="17" height="15" rx="1" />

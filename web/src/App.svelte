@@ -136,7 +136,21 @@
     if (location.pathname === '/demo' || location.pathname === '/demo/') { history.replaceState(null, '', '/app/basic'); setTimeout(() => startDemo(DEFAULT_DEMO), 600); }
     const hashMode = loadFromURLHash(); const params = new URLSearchParams(location.search); if (hashMode === 'embed' || params.has('embed')) uiStore.embedMode = true;
     const exampleId = params.get('example'); if (exampleId) setTimeout(() => modelStore.loadExample(exampleId).then(() => { resultsStore.clear(); window.dispatchEvent(new Event('stabileo-solve')); openInspectFromUrl(params); openKinematicFromUrl(params); }).catch(err => console.error(`[stabileo] example "${exampleId}" failed to load:`, err)), 80);
-    if (!hashMode) { const saved = loadWorkspaceFromLocalStorage(); if (saved?.tabs.length) { tabManager.restoreSession(saved.tabs, saved.activeTabId); const requested = findTabBySlug(params.get('tab')); if (requested && requested.id !== tabManager.activeTabId) tabManager.switchTab(requested.id); replaceAppUrl(modelStore.model.name); autosaveData = null; } else { void loadAutosave().then(result => { if (result.value && result.value.snapshot.nodes.length > 0) autosaveData = result.value; }); } }
+    if (!hashMode) {
+      const saved = loadWorkspaceFromLocalStorage();
+      if (saved?.tabs.length) {
+        tabManager.restoreSession(saved.tabs, saved.activeTabId);
+        const requested = findTabBySlug(params.get('tab'));
+        if (requested && requested.id !== tabManager.activeTabId) tabManager.switchTab(requested.id);
+        replaceAppUrl(modelStore.model.name);
+        autosaveData = null;
+      } else {
+        uiStore.unitSystem = 'SI_MM';
+        uiStore.resetNewProjectPresentation();
+        tabManager.syncCurrentTab();
+        void loadAutosave().then(result => { if (result.value && result.value.snapshot.nodes.length > 0) autosaveData = result.value; });
+      }
+    }
     autosaveInterval = setInterval(() => { void requestAutosave('timer'); saveWorkspaceToLocalStorage(); }, 30_000);
     const onDxf = () => dxfFileInput?.click(); const onDxfDrop = (e: Event) => { dxfImportFile = (e as CustomEvent<File>).detail; showDxfImport = true; }; const onImport = () => { showImportDialog = true; }; const onSolve = () => { cancelPendingLiveCalc(); void runGlobalSolve(); };
     window.addEventListener('stabileo-export-png', handleExportPNG); window.addEventListener('stabileo-import-dxf', onDxf); window.addEventListener('stabileo-dxf-drop', onDxfDrop); window.addEventListener('stabileo-import-coords', onImport); window.addEventListener('stabileo-solve', onSolve); window.addEventListener('stabileo-open-panel', handleOpenPanelEvent);

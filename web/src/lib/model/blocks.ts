@@ -22,7 +22,7 @@ export interface BlockInstance extends BlockPose {
   elementIds: Record<number, number>;
 }
 export type BlockNodeRef = { kind: 'base'; nodeId: number } | { kind: 'block'; instanceId: number; localNodeId: number };
-export interface BlockJoint { id: number; a: BlockNodeRef; b: BlockNodeRef; kind: 'pin' | 'continuous' }
+export interface BlockJoint { id: number; a: BlockNodeRef; b: BlockNodeRef; kind: 'pin' | 'continuous'; locked?: boolean }
 export interface Blocks {
   definitions: BlockDefinition[];
   instances: BlockInstance[];

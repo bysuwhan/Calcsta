@@ -70,9 +70,9 @@ if (hasLocalStorage()) {
 
 function createUIStore() {
   const savedUnitSystem = hasLocalStorage() ? localStorage.getItem('stabileo-unitSystem') : null;
-  const initialUnitSystem: UnitSystem = savedUnitSystem === 'Imperial' || savedUnitSystem === 'SI_MM'
+  const initialUnitSystem: UnitSystem = savedUnitSystem === 'SI' || savedUnitSystem === 'Imperial' || savedUnitSystem === 'SI_MM'
     ? savedUnitSystem
-    : 'SI';
+    : 'SI_MM';
   const savedStressUnit = hasLocalStorage() ? localStorage.getItem('stabileo-stressUnit') : null;
   const initialStressUnit: StressUnit = savedStressUnit === 'kgf/cm²' ? savedStressUnit : 'MPa';
   setStressUnit(initialStressUnit);

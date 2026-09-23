@@ -65,7 +65,17 @@
     <div class="edit" data-testid="block-edit-banner"><strong>블록 편집 중</strong><span>로컬 x {localPosition.x.toFixed(3)}, y {localPosition.y.toFixed(3)}</span><p>형태 변경은 연결 복제본에도 적용됩니다.</p><p>하중·지점은 바탕에서 지정하세요.</p></div>
   {/if}
   {#if activeJoints.length}
-    <div class="joints"><strong>연결</strong>{#each activeJoints as j (j.id)}<button disabled={editing} title="우클릭하여 연결 해제" oncontextmenu={e => { e.preventDefault(); if (!editing) modelStore.removeBlockJoint(j.id); }} onclick={() => modelStore.removeBlockJoint(j.id)}>{j.kind === 'pin' ? '핀' : '연속'} {j.id} · 해제</button>{/each}</div>
+    <div class="joints"><strong>연결</strong>{#each activeJoints as j (j.id)}
+      <div class="joint-row" data-testid={`block-joint-${j.id}`}>
+        <span>{j.kind === 'pin' ? '핀' : '연속'} {j.id}</span>
+        <button type="button" class="joint-lock" class:locked={!!j.locked} disabled={editing}
+          aria-label={`${j.kind === 'pin' ? '핀' : '연속'} ${j.id} ${j.locked ? '잠금 해제' : '잠그기'}`}
+          aria-pressed={!!j.locked} title={j.locked ? '연결 잠금 해제' : '연결 잠그기'}
+          onclick={() => modelStore.setBlockJointLocked(j.id, !j.locked)}><Icon name={j.locked ? 'lock' : 'lock-open'} size={16} /></button>
+        <button type="button" class="joint-remove" disabled={editing} aria-label={`${j.kind === 'pin' ? '핀' : '연속'} ${j.id} 연결 해제`}
+          title="연결 해제" onclick={() => modelStore.removeBlockJoint(j.id)}>×</button>
+      </div>
+    {/each}</div>
   {/if}
 </aside>
 {#if blockUI.context}
@@ -133,6 +143,11 @@
   .list { display: flex; flex-direction: column; gap: 3px; }
   .edit, .joints { display: flex; flex-direction: column; gap: 8px; padding-top: 10px; border-top: 1px solid #0f3460; }
   .edit strong, .joints strong { color: #4ecdc4; }
+  .joint-row { display: flex; align-items: center; gap: 4px; min-height: 29px; }
+  .joint-row span { flex: 1; }
+  .joint-row button { width: 27px; height: 27px; padding: 3px; display: grid; place-items: center; }
+  .joint-lock.locked { color: #f8bd63; border-color: #f8bd63; }
+  .joint-remove { font-size: 18px; line-height: 1; }
   p { margin: 0; line-height: 1.5; }
   form { display: flex; gap: 6px; flex-wrap: wrap; } form input { width: 100%; min-width: 0; padding: 6px; }
   .ctx-backdrop { position: fixed; inset: 0; z-index: 10000; }

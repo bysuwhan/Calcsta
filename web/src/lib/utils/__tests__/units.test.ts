@@ -3,7 +3,7 @@ import { fromDisplay, setStressUnit, toDisplay, unitLabel, type Quantity } from 
 
 afterEach(() => setStressUnit('MPa'));
 
-describe('SI (kg, mm) display units', () => {
+describe('SI (kgf, mm) display units', () => {
   const cases: Array<[Quantity, number, string]> = [
     ['length', 1000, 'mm'],
     ['displacement', 1000, 'mm'],

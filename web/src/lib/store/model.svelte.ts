@@ -1,4 +1,5 @@
-import { activeBlockModel, BLOCK_COLOR_PALETTE, blockForElement, blockForNode, cleanBlockReferences, copyBlockData, createBlock, emptyBlocks, jointTouches, localToWorld, materializeBlock, materializedSketchConstraints, nextBlockColor, nodeRef, worldToLocal, type Blocks, type BlockPose, type Point2 } from '../model/blocks';
+import { activeBlockModel, BLOCK_COLOR_PALETTE, blockForElement, blockForNode, cleanBlockReferences, copyBlockData, createBlock, emptyBlocks, jointTouches, localToWorld, materializeBlock, materializedSketchConstraints, nextBlockColor, nodeRef, resolveNodeRef, worldToLocal, type Blocks, type BlockPose, type Point2 } from '../model/blocks';
+import { solveLockedBlockDrag, type AssemblyPlacement, type BlockGrip } from '../model/locked-block-drag';
 import { angleDimensionSector, elementGeometry, solveSketchMove, transformSketchConstraint, inferSketchDimension, dimensionResiduals, remapSketchReferences, sketchReferences, type SketchConstraint, type SketchReference, type SmartDimension } from '../model/sketch-constraints';
 import {
   defaultCodeSettings, migrateCodeSettings, type ProjectCodeSettings,
@@ -956,7 +957,7 @@ function createModelStore() {
   let _bulkConstraintBuffer: Constraint3D[] | null = null;
   let editingBlockId = $state<number | null>(null);
   let blockEditSnapshot: ModelSnapshot | null = null;
-  let blockPreview = $state<{ id: number; pose: BlockPose } | null>(null);
+  let blockPreview = $state<{ id: number; pose: BlockPose; placement?: AssemblyPlacement } | null>(null);
   let nodeTransformPreview = $state<Map<number, Node> | null>(null);
   let _pushUndoAppearance: (() => void) | null = null;
   const activeModel = () => activeBlockModel(model);
@@ -964,7 +965,12 @@ function createModelStore() {
     const active = activeModel().nodes;
     if (!blockPreview && !nodeTransformPreview) return active;
     const nodes = new Map(active);
-    if (blockPreview) {
+    if (blockPreview?.placement) {
+      for (const [id, position] of blockPreview.placement.nodePositions) {
+        const node = nodes.get(id);
+        if (node) nodes.set(id, { ...node, ...position });
+      }
+    } else if (blockPreview) {
       const b = model.blocks?.instances.find(b => b.id === blockPreview!.id);
       if (b) {
         for (const id of Object.values(b.nodeIds)) {
@@ -1446,7 +1452,12 @@ function createModelStore() {
     blockForElement(id: number) { return blockForElement(model.blocks ?? emptyBlocks(), id); },
     canEditNode(id: number) { return (blockForNode(model.blocks ?? emptyBlocks(), id)?.id ?? null) === editingBlockId; },
     canEditElement(id: number) { return (blockForElement(model.blocks ?? emptyBlocks(), id)?.id ?? null) === editingBlockId; },
-    previewBlock(id: number, pose: BlockPose | null) { blockPreview = pose ? { id, pose } : null; },
+    previewBlock(id: number, pose: BlockPose | null, grip?: BlockGrip) {
+      if (!pose) { blockPreview = null; return; }
+      const placement = solveLockedBlockDrag(model, id, pose, grip);
+      if (placement === null) return; // Keep the last feasible preview.
+      blockPreview = { id, pose: placement?.poses.get(id) ?? pose, placement: placement ?? undefined };
+    },
     previewNodeTransform(nodes: Map<number, Node> | null) {
       nodeTransformPreview = nodes ? new Map(nodes) : null;
     },
@@ -1505,12 +1516,44 @@ function createModelStore() {
       model.blocks!.definitions = model.blocks!.definitions.filter(d => model.blocks!.instances.some(b => b.definitionId === d.id));
       cleanBlockReferences(model); publishBlocks();
     },
-    placeBlock(id: number, pose: BlockPose, pin?: { source: number; target: number }) {
+    placeBlock(id: number, pose: BlockPose, pin?: { source: number; target: number }, grip?: BlockGrip) {
       const b = model.blocks?.instances.find(b => b.id === id); if (!b || editingBlockId !== null) return;
       if (![pose.x, pose.y, pose.angle].every(Number.isFinite)) return;
+      const solved = solveLockedBlockDrag(model, id, pose, grip);
+      if (solved === null) { blockPreview = null; return; }
+      const placement = solved ?? undefined;
+      const placedPose = placement?.poses.get(id) ?? pose;
+      const hasMotion = placement ? [...placement.poses].some(([blockId, next]) => {
+        const current = model.blocks!.instances.find(item => item.id === blockId)!;
+        return Math.hypot(next.x - current.x, next.y - current.y, next.angle - current.angle) > 1e-10;
+      }) || [...placement.baseNodes].some(([nodeId, next]) => {
+        const current = model.nodes.get(nodeId)!;
+        return Math.hypot(next.x - current.x, next.y - current.y) > 1e-10;
+      }) : true;
+      if (!hasMotion && !pin) { blockPreview = null; return; }
       _pushUndo?.(); blockPreview = null;
-      model.blocks!.joints = model.blocks!.joints.filter(j => !jointTouches(j, id));
-      Object.assign(b, pose); materializeBlock(model, b, nextId);
+      if (placement) {
+        for (const [blockId, next] of placement.poses) {
+          const moving = model.blocks!.instances.find(item => item.id === blockId)!;
+          Object.assign(moving, next);
+          materializeBlock(model, moving, nextId);
+        }
+        for (const [nodeId, next] of placement.baseNodes) {
+          const node = model.nodes.get(nodeId);
+          if (node) model.nodes.set(nodeId, { ...node, ...next });
+        }
+        model.blocks!.joints = model.blocks!.joints.filter(j => {
+          if (j.locked) return true;
+          if (jointTouches(j, id)) return false;
+          const ai = resolveNodeRef(model.blocks!, j.a), bi = resolveNodeRef(model.blocks!, j.b);
+          const a = ai === undefined ? undefined : model.nodes.get(ai);
+          const z = bi === undefined ? undefined : model.nodes.get(bi);
+          return !!a && !!z && Math.hypot(a.x - z.x, a.y - z.y) < 1e-7;
+        });
+      } else {
+        model.blocks!.joints = model.blocks!.joints.filter(j => !jointTouches(j, id));
+        Object.assign(b, placedPose); materializeBlock(model, b, nextId);
+      }
       if (pin && Object.values(b.nodeIds).includes(pin.source) && !Object.values(b.nodeIds).includes(pin.target)) {
         const a = model.nodes.get(pin.source), target = activeBlockModel(model).nodes.get(pin.target);
         if (a && target && Math.hypot(a.x - target.x, a.y - target.y) < 1e-7) {
@@ -1518,6 +1561,12 @@ function createModelStore() {
         }
       }
       publishBlocks();
+    },
+    setBlockJointLocked(id: number, locked: boolean) {
+      if (editingBlockId !== null) return;
+      const joint = model.blocks?.joints.find(j => j.id === id);
+      if (!joint || !!joint.locked === locked) return;
+      _pushUndo?.(); joint.locked = locked; publishBlocks();
     },
     removeBlockJoint(id: number) {
       if (editingBlockId !== null) return;

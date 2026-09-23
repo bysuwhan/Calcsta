@@ -8,6 +8,7 @@ import type { ModelSnapshot, SnapshotKind } from './history.svelte';
 import { dsmStepsStore } from './dsmSteps.svelte';
 import type { DiagramType } from './results.svelte';
 import type { Tool, SelectMode, ElementColorMode } from './ui.svelte';
+import type { UnitSystem } from '../utils/units';
 import { t, isDefaultName } from '../i18n';
 
 export interface TabState {
@@ -57,6 +58,7 @@ export interface TabState {
   showSecondarySelector: boolean;
   showAxes: boolean;
   // Other per-tab settings
+  unitSystem?: UnitSystem; // absent in sessions saved before units were tracked per tab
   includeSelfWeight: boolean;
   liveCalc: boolean;
   // Viewport state (2D)
@@ -125,6 +127,7 @@ function createTabManager() {
       showReactions: resultsStore.showReactions,
       showConstraintForces: resultsStore.showConstraintForces,
       // Other per-tab settings
+      unitSystem: uiStore.unitSystem,
       includeSelfWeight: uiStore.includeSelfWeight,
       liveCalc: uiStore.liveCalc,
       // Viewport state
@@ -184,6 +187,7 @@ function createTabManager() {
 
 
       // Restore other per-tab settings
+      if (state.unitSystem) uiStore.unitSystem = state.unitSystem;
       uiStore.includeSelfWeight = state.includeSelfWeight;
       uiStore.liveCalc = state.liveCalc;
 
@@ -267,6 +271,7 @@ function createTabManager() {
           showPrimarySelector: uiStore.showPrimarySelector,
           showSecondarySelector: uiStore.showSecondarySelector,
           showAxes: uiStore.showAxes,
+          unitSystem: uiStore.unitSystem,
           includeSelfWeight: uiStore.includeSelfWeight,
           liveCalc: uiStore.liveCalc,
           zoom: uiStore.zoom,
@@ -310,7 +315,7 @@ function createTabManager() {
         redoStack: [],
         // Inherit visualization config from current tab
         showGrid: uiStore.showGrid,
-        gridSize: uiStore.unitSystem === 'SI_MM' ? 0.1 : uiStore.gridSize,
+        gridSize: 0.1,
         snapToGrid: false,
         showNodeLabels: uiStore.showNodeLabels,
         showElementLabels: uiStore.showElementLabels,
@@ -321,6 +326,7 @@ function createTabManager() {
         showPrimarySelector: uiStore.showPrimarySelector,
         showSecondarySelector: uiStore.showSecondarySelector,
         showAxes: uiStore.showAxes,
+        unitSystem: 'SI_MM',
         includeSelfWeight: uiStore.includeSelfWeight,
         liveCalc: uiStore.liveCalc,
         // New tabs inherit current viewport (user can zoom-to-fit after)
@@ -338,6 +344,7 @@ function createTabManager() {
       historyStore.clear();
       dsmStepsStore.clear();
       uiStore.resetSession();
+      uiStore.unitSystem = 'SI_MM';
       uiStore.resetNewProjectPresentation();
     },
 
@@ -445,11 +452,12 @@ function createTabManager() {
     /** Restore a full session (all tabs) from a saved file */
     restoreSession(savedTabs: TabState[], savedActiveId: string): void {
       if (savedTabs.length === 0) return;
-      tabs = savedTabs;
+      // Older sessions used one shared display unit for every tab.
+      tabs = savedTabs.map(tab => ({ ...tab, unitSystem: tab.unitSystem ?? uiStore.unitSystem }));
       // Activate the tab that was active when session was saved
-      const targetId = savedTabs.find(t => t.id === savedActiveId) ? savedActiveId : savedTabs[0].id;
+      const targetId = tabs.find(t => t.id === savedActiveId) ? savedActiveId : tabs[0].id;
       activeTabId = targetId;
-      const target = savedTabs.find(t => t.id === targetId)!;
+      const target = tabs.find(t => t.id === targetId)!;
       restoreState(target);
     },
   };

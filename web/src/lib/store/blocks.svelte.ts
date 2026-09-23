@@ -13,6 +13,7 @@ type Command = {
   elements?: number[];
   nodes?: number[];
   pose?: BlockPose;
+  gripTarget?: Point2;
   target?: 'block' | 'entities';
   originalNodes?: Node[];
   nodePreview?: Map<number, Node>;
@@ -196,6 +197,7 @@ function preview(point: Point2) {
   const b = modelStore.blocks.instances.find(b => b.id === command!.id); if (!b) { cancel(); return; }
   if (command.kind === 'move') {
     const target = snap(point, id => modelStore.blockForNode(id)?.id !== b.id);
+    command.gripTarget = target;
     command.pose = { x: b.x + target.x - command.base.x, y: b.y + target.y - command.base.y, angle: b.angle };
   } else {
     const p = snap(point);
@@ -203,7 +205,8 @@ function preview(point: Point2) {
     const origin = localToWorld({ x: b.x - command.base.x, y: b.y - command.base.y }, { ...command.base, angle });
     command.pose = { ...origin, angle: b.angle + angle };
   }
-  modelStore.previewBlock(b.id, command.pose);
+  modelStore.previewBlock(b.id, command.pose,
+    command.kind === 'move' ? { source: command.base, target: command.gripTarget! } : undefined);
 }
 function nextDefaultBlockName(): string {
   const existingNames = new Set(modelStore.blocks.instances.map(b => b.name));
@@ -274,7 +277,9 @@ function click(point: Point2): boolean {
     }
     const target = nearest(point, id => modelStore.blockForNode(id)?.id !== command!.id);
     const pin = command.kind === 'move' && command.source !== undefined && target ? { source: command.source, target: target.id } : undefined;
-    modelStore.placeBlock(command.id!, command.pose!, pin); cancel();
+    modelStore.placeBlock(command.id!, command.pose!, pin,
+      command.kind === 'move' && command.base && command.gripTarget
+        ? { source: command.base, target: command.gripTarget } : undefined); cancel();
   }
   return true;
 }
@@ -294,7 +299,8 @@ export const blockUI = {
     if (!block || !node || !Number.isFinite(point.x) || !Number.isFinite(point.y)) return false;
     const dx = point.x - node.x, dy = point.y - node.y;
     if (Math.abs(dx) <= 1e-10 && Math.abs(dy) <= 1e-10) return true;
-    modelStore.placeBlock(block.id, { x: block.x + dx, y: block.y + dy, angle: block.angle });
+    modelStore.placeBlock(block.id, { x: block.x + dx, y: block.y + dy, angle: block.angle },
+      undefined, { source: { x: node.x, y: node.y }, target: point });
     resultsStore.clear();
     return true;
   },

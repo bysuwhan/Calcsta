@@ -2195,7 +2195,7 @@ const koSource: Translations = {
   'table.frame': '라멘',
   'table.truss': '트러스',
   'config.unitSI': 'SI (kN, m)',
-  'config.unitSIMm': 'SI (kg, mm)',
+  'config.unitSIMm': 'SI (kgf, mm)',
   'config.unitImperial': '영국식 (kip, ft)',
   'matEdit.optional': '선택 사항',
   'dsm.expectedValue': '기대값',

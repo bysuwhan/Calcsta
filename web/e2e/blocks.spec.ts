@@ -54,6 +54,36 @@ test('create, move and snap a pin, cancel preview, rotate by two reference point
   expect(errors).toEqual([]);
 });
 
+test('locking a pin in the connection list keeps it attached while dragging', async ({ page }) => {
+  await seed(page); await create(page);
+  await page.evaluate(async () => {
+    const { modelStore: m } = await import(/* @vite-ignore */ '/src/lib/store/index.ts');
+    const block = m.blocks.instances[0];
+    const end = block.nodeIds[2];
+    const base = [...m.model.nodes.values()].find(n => n.x === 5 && n.y === 1)!;
+    m.placeBlock(block.id, { x: 3, y: 1, angle: 0 }, { source: end, target: base.id });
+    m.addSupport(base.id, 'pinned');
+  });
+  const joint = page.getByTestId('block-joint-2');
+  await expect(joint).toBeVisible();
+  await joint.getByRole('button', { name: '핀 2 잠그기' }).click();
+  await expect(joint.getByRole('button', { name: '핀 2 잠금 해제' })).toHaveAttribute('aria-pressed', 'true');
+
+  const start = await point(page, 3, 1), end = await point(page, 5, -1);
+  await page.mouse.move(start.x, start.y);
+  await page.mouse.down();
+  await page.mouse.move(end.x, end.y, { steps: 8 });
+  await page.mouse.up();
+
+  const state = await read(page);
+  expect(state.blocks.joints).toHaveLength(1);
+  expect(state.blocks.joints[0].locked).toBe(true);
+  expect(state.blocks.instances[0].angle).toBeCloseTo(Math.PI / 2, 1);
+  const blockEnd = state.nodes.find((n: { id: number }) => n.id === state.blocks.instances[0].nodeIds[2])!;
+  const base = state.nodes.find((n: { x: number; y: number }) => n.x === 5 && n.y === 1)!;
+  expect(Math.hypot(blockEnd.x - base.x, blockEnd.y - base.y)).toBeLessThan(1e-6);
+});
+
 test('linked duplication, context independence, editing isolation and visibility', async ({ page }) => {
   await seed(page); await create(page);
   await page.getByTestId('block-row-1').getByRole('button', { name: '링크', exact: true }).click({ button: 'right' });

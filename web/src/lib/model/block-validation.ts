@@ -35,7 +35,8 @@ export function validateBlocks(snapshot: ModelSnapshot): boolean {
       }
     }
     for (const j of b.joints) {
-      if (!validId(j.id) || jointIds.has(j.id) || !['pin', 'continuous'].includes(j.kind)) return false;
+      if (!validId(j.id) || jointIds.has(j.id) || !['pin', 'continuous'].includes(j.kind)
+        || (j.locked !== undefined && typeof j.locked !== 'boolean')) return false;
       jointIds.add(j.id);
       if (![j.a, j.b].every(r => r && (r.kind === 'base' || r.kind === 'block'))) return false;
       const a = resolveNodeRef(b, j.a), z = resolveNodeRef(b, j.b);
